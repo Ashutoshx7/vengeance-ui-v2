@@ -13,13 +13,25 @@ interface CodeBlockProps {
 export async function CodeBlock({ fileName, code, language = "tsx" }: CodeBlockProps) {
   let codeString = code || "";
 
-  // The Magic: Read directly from the registry folder
+  // Try multiple source folders so migrated docs/components can still show code.
   if (fileName) {
+    const candidates = [
+      path.join(process.cwd(), "src", "registry", fileName),
+      path.join(process.cwd(), "src", "components", "ui", fileName),
+      path.join(process.cwd(), "src", "components", "docs", fileName),
+      path.join(process.cwd(), "src", "components", "docs", "Fliptext-examples", fileName),
+    ];
+
     try {
-      const filePath = path.join(process.cwd(), "src", "registry", fileName);
-      codeString = fs.readFileSync(filePath, "utf8");
+      const existingFilePath = candidates.find((candidatePath) => fs.existsSync(candidatePath));
+
+      if (!existingFilePath) {
+        throw new Error("No matching source file found");
+      }
+
+      codeString = fs.readFileSync(existingFilePath, "utf8");
     } catch (e) {
-      codeString = `// Error reading file: ${fileName}\n// Make sure it exists in src/registry/`;
+      codeString = `// Error reading file: ${fileName}\n// Looked in src/registry, src/components/ui, and src/components/docs`;
     }
   }
 

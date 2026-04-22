@@ -8,8 +8,28 @@ export const TabsContext = React.createContext<{
   setActiveTab: (v: string) => void;
 }>({ activeTab: "", setActiveTab: () => {} });
 
-export function Tabs({ children, defaultValue, className }: { children: React.ReactNode; defaultValue: string; className?: string }) {
-  const [activeTab, setActiveTab] = React.useState(defaultValue);
+interface TabsProps {
+  children: React.ReactNode;
+  defaultValue?: string;
+  value?: string;
+  onValueChange?: (value: string) => void;
+  className?: string;
+}
+
+export function Tabs({ children, defaultValue = "", value, onValueChange, className }: TabsProps) {
+  const [internalActiveTab, setInternalActiveTab] = React.useState(defaultValue);
+  const activeTab = value ?? internalActiveTab;
+
+  const setActiveTab = React.useCallback(
+    (nextValue: string) => {
+      if (value === undefined) {
+        setInternalActiveTab(nextValue);
+      }
+      onValueChange?.(nextValue);
+    },
+    [onValueChange, value]
+  );
+
   return (
     <TabsContext.Provider value={{ activeTab, setActiveTab }}>
       <div className={cn("w-full", className)}>{children}</div>
@@ -45,7 +65,7 @@ export function TabsTrigger({ value, children, className }: { value: string; chi
   );
 }
 
-export function TabsContent({ value, children }: { value: string; children: React.ReactNode }) {
+export function TabsContent({ value, children, className }: { value: string; children: React.ReactNode; className?: string }) {
   const { activeTab } = React.useContext(TabsContext);
   const isActive = activeTab === value;
   
@@ -53,7 +73,8 @@ export function TabsContent({ value, children }: { value: string; children: Reac
     <div 
       className={cn(
         "mt-4 outline-none",
-        isActive ? "block" : "hidden"
+        isActive ? "block" : "hidden",
+        className
       )}
     >
       {children}
