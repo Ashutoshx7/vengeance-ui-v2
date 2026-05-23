@@ -138,7 +138,7 @@ export function TableOfContents() {
   const dotX = getLineOffset(items[activeIndex].depth) + 0.5;
   const dotY = (trackTop + trackBottom) / 2;
 
-  const transitionConfig = { type: "tween", ease: "easeOut", duration: 0.25 };
+  const transitionConfig = { type: "tween" as const, ease: "easeOut" as const, duration: 0.25 };
 
   return (
     <aside className="hidden xl:block sticky top-20 h-[calc(100vh-5rem)] overflow-y-auto py-6 pl-4 font-sans">
