@@ -1,22 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface AnimatedHeroProps {
-    /** Hero title text */
-    title?: string;
-    /** Whether to show the theme toggle button */
-    showThemeToggle?: boolean;
     /** Additional CSS classes */
     className?: string;
+    /** Optional children to render over the background */
+    children?: React.ReactNode;
 }
 
 export function AnimatedHero({
-    title = "AN AWESOME TITLE",
-    showThemeToggle = true,
     className = "",
+    children,
 }: AnimatedHeroProps) {
     const [isDark, setIsDark] = useState(false);
     const [mounted, setMounted] = useState(false);
@@ -33,10 +29,6 @@ export function AnimatedHero({
         });
         return () => observer.disconnect();
     }, []);
-
-    const toggleTheme = () => {
-        document.documentElement.classList.toggle("dark");
-    };
 
     if (!mounted) return null;
 
@@ -85,61 +77,11 @@ export function AnimatedHero({
                 />
             </div>
 
-            {/* Content overlay — matches original .content */}
-            {/* mix-blend-mode: difference + filter: invert(1) is the KEY to the effect */}
-            <div
-                className="absolute inset-0 flex flex-col items-center justify-center gap-9 text-center px-4"
-                style={{
-                    mixBlendMode: "difference",
-                    filter: "invert(1)",
-                }}
-            >
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="text-[clamp(2rem,1rem+5vw,8rem)] font-black leading-tight tracking-tight relative"
-                    data-text={title}
-                >
-                    {/* Visible base text */}
-                    <span className="relative z-0">{title}</span>
-
-                    {/* Glass text effect — matches original h1::before with backdrop-filter */}
-                    <span
-                        aria-hidden
-                        className="absolute inset-0 flex items-center justify-center pointer-events-none z-10"
-                        style={{
-                            background: "white",
-                            backgroundClip: "text",
-                            WebkitBackgroundClip: "text",
-                            WebkitTextFillColor: "transparent",
-                            backgroundColor: "white",
-                            backdropFilter: "blur(19px) brightness(12.5)",
-                            WebkitBackdropFilter: "blur(19px) brightness(12.5)",
-                            WebkitTextStroke: "1px white",
-                        }}
-                    >
-                        {title}
-                    </span>
-                </motion.h1>
-
-                {showThemeToggle && (
-                    <motion.button
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5, delay: 0.4 }}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={toggleTheme}
-                        className="group cursor-pointer p-3 rounded-full border border-dashed hover:border-solid transition-all"
-                        aria-label="Toggle theme"
-                    >
-                        <span className="animate-aurora-blink text-sm font-medium px-1">
-                            → switch bg
-                        </span>
-                    </motion.button>
-                )}
-            </div>
+            {children && (
+                <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
+                    {children}
+                </div>
+            )}
         </section>
     );
 }

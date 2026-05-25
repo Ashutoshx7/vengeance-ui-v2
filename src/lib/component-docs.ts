@@ -571,7 +571,7 @@ export function LiquidOceanDemo() {
       { prop: "color2", type: "string", defaultValue: "'#00ccff'", description: "Secondary ocean color." },
     ],
   },
-  
+
   "creepy-button": {
     dependencies: "npm install framer-motion clsx tailwind-merge",
     includeUtils: true,
@@ -589,7 +589,7 @@ export function CreepyButtonDemo() {
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes." },
     ],
   },
-  
+
   "spotlight-navbar": {
     dependencies: "npm install framer-motion clsx tailwind-merge",
     includeUtils: true,
