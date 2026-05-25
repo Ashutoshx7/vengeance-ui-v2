@@ -43,14 +43,14 @@ export function AnimatedButtonDemo() {
     ],
   },
 
-  "animated-hero": {
+  "animated-rays": {
     dependencies: "npm install framer-motion clsx tailwind-merge",
     includeUtils: true,
-    usageCode: `import AnimatedHero from "@/components/ui/animated-hero"
+    usageCode: `import AnimatedRays from "@/components/ui/animated-rays"
 
-export function AnimatedHeroDemo() {
+export function AnimatedRaysDemo() {
   return (
-    <AnimatedHero
+    <AnimatedRays
       headline="Build Beautiful Interfaces"
       subtext="Create stunning animations with ease"
     />

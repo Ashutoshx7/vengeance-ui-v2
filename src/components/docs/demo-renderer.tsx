@@ -23,7 +23,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "my-animated-button": dynamic(() => import("@/registry/my-animated-button").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
   "creepy-button": dynamic(() => import("@/components/docs/creepy-button-demo").then((m) => ({ default: m.CreepyButtonDemo })), { ssr: false, loading: LOADING }),
 
-  "animated-hero": dynamic(() => import("@/components/docs/animated-hero").then((m) => ({ default: m.AnimatedHeroDemo })), { ssr: false, loading: LOADING }),
+  "animated-rays": dynamic(() => import("@/components/docs/animated-rays").then((m) => ({ default: m.AnimatedRaysDemo })), { ssr: false, loading: LOADING }),
   "animated-number": dynamic(() => import("@/components/docs/animated-number").then((m) => ({ default: m.AnimatedNumberDemo })), { ssr: false, loading: LOADING }),
   "flip-text": dynamic(() => import("@/components/docs/Fliptext-examples/flip-text-demo").then((m) => ({ default: m.default })), { ssr: false, loading: LOADING }),
   "flip-fade-text": dynamic(() => import("@/components/docs/flip-fade-text").then((m) => ({ default: m.FlipFadeTextDemo })), { ssr: false, loading: LOADING }),

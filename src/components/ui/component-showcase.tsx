@@ -12,7 +12,7 @@ interface ComponentShowcaseProps {
   componentName: string; // The exact filename in the registry (without .tsx)
   title: string;
   description: string;
-  slug: string;
+  slug?: string;
   children: React.ReactNode; // The live component itself
 }
 
@@ -23,22 +23,22 @@ interface ComponentShowcaseProps {
  */
 function readComponentSource(componentName: string): string {
   const fileName = `${componentName}.tsx`;
-  const root = /* turbopackIgnore: true */ process.cwd();
-  const candidates = [
-    path.join(root, "src", "components", "ui", fileName),
-    path.join(root, "src", "registry", fileName),
-    path.join(root, "src", "components", "docs", fileName),
-  ];
 
-  for (const candidate of candidates) {
-    try {
-      if (fs.existsSync(candidate)) {
-        return fs.readFileSync(candidate, "utf8");
-      }
-    } catch {
-      continue;
-    }
-  }
+  try {
+    const p1 = path.join(process.cwd(), "src", "components", "ui", fileName);
+    if (fs.existsSync(p1)) return fs.readFileSync(p1, "utf8");
+  } catch {}
+
+  try {
+    const p2 = path.join(process.cwd(), "src", "registry", fileName);
+    if (fs.existsSync(p2)) return fs.readFileSync(p2, "utf8");
+  } catch {}
+
+  try {
+    const p3 = path.join(process.cwd(), "src", "components", "docs", fileName);
+    if (fs.existsSync(p3)) return fs.readFileSync(p3, "utf8");
+  } catch {}
+
   return `// Source code for ${componentName} not found`;
 }
 
@@ -46,7 +46,7 @@ export function ComponentShowcase({
   componentName,
   title,
   description,
-  slug,
+  slug = componentName,
   children,
 }: ComponentShowcaseProps) {
   const installCommand = `npx shadcn@latest add @vengeanceui/${componentName}`;

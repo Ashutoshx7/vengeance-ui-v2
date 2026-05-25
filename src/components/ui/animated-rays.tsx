@@ -3,17 +3,17 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-interface AnimatedHeroProps {
+interface AnimatedRaysProps {
     /** Additional CSS classes */
     className?: string;
     /** Optional children to render over the background */
     children?: React.ReactNode;
 }
 
-export function AnimatedHero({
+export function AnimatedRays({
     className = "",
     children,
-}: AnimatedHeroProps) {
+}: AnimatedRaysProps) {
     const [isDark, setIsDark] = useState(false);
     const [mounted, setMounted] = useState(false);
 
@@ -86,4 +86,4 @@ export function AnimatedHero({
     );
 }
 
-export default AnimatedHero;
+export default AnimatedRays;

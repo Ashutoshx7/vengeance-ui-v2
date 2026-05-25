@@ -83,7 +83,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
     name: "Backgrounds",
     icon: Image,
     items: [
-      { name: "Animated Hero", slug: "animated-hero", description: "Hero with animated heading", componentName: "animated-hero", isNew: true },
+      { name: "Animated Rays", slug: "animated-rays", description: "Hero with animated heading", componentName: "animated-rays", isNew: true },
       { name: "Perspective Grid", slug: "perspective-grid", description: "3D perspective matrix background", componentName: "perspective-grid", isNew: true },
       { name: "Light Lines", slug: "light-lines", description: "Animated flowing line background", componentName: "light-lines", isNew: true },
       { name: "Liquid Ocean", slug: "liquid-ocean", description: "Animated ocean wave field", componentName: "liquid-ocean", isNew: true },
