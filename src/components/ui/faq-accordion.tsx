@@ -14,17 +14,16 @@ export interface FaqAccordionProps extends React.HTMLAttributes<HTMLDivElement> 
 }
 
 const DEFAULT_ITEMS: FaqItem[] = [
-  { question: "Do you accept credit cards?", answer: "Yes, but we charge a 2% service charge." },
-  { question: "Do you exchange dollar and euros?", answer: "No, but there are banks, ATMs, and currency exchanges at various locations around town." },
-  { question: "Do you have WiFi?", answer: "Yes, we have free WiFi, but service cannot be guaranteed." },
-  { question: "Do you offer shuttle service to the airport?", answer: "Yes, we offer shuttle service for a flat $30USD fee." },
-  { question: "Is your facility handicap accessible?", answer: "We have one room that is wheelchair accessible with accessible bathroom features." },
-  { question: "When is your busiest time of year?", answer: "May through August is our busiest time." },
+  { question: "What is Vengeance UI?", answer: "Vengeance UI is a high-performance, dark-mode first component library designed for the next generation of web applications." },
+  { question: "Can I use it with Tailwind CSS?", answer: "Yes! All components are built on top of Tailwind CSS and highly customizable using utility classes." },
+  { question: "Are the components accessible?", answer: "Accessibility is a core focus. We ensure proper ARIA attributes, keyboard navigation, and semantic HTML structure." },
+  { question: "Do I need to install a heavy npm package?", answer: "No. Vengeance UI provides a CLI that lets you copy and paste only the components you need directly into your project." },
+  { question: "Is it compatible with React and Next.js?", answer: "Absolutely. The library is built with React in mind and perfectly supports Next.js Server Components and client-side rendering." },
 ];
 
 export function FaqAccordion({
   items = DEFAULT_ITEMS,
-  title = "HOTEL FAQs",
+  title = "Vengeance UI FAQs",
   className,
   ...props
 }: FaqAccordionProps) {
