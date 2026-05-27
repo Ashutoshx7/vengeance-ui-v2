@@ -954,4 +954,28 @@ export function Demo() {
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the tunnel container." },
     ],
   },
+
+
+  "typing-keyboard": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { TypingKeyboard } from "@/components/ui/typing-keyboard"
+
+export function Demo() {
+  return (
+    <TypingKeyboard
+      autoTypeText="Hello from Vengeance UI!"
+      typingSpeed={[50, 130]}
+      scale={0.75}
+    />
+  )
+}`,
+    props: [
+      { prop: "autoTypeText", type: "string", defaultValue: "\"Hello...\"", description: "Text the keyboard auto-types in a loop." },
+      { prop: "typingSpeed", type: "[number, number]", defaultValue: "[40, 120]", description: "Min/max delay in ms between characters." },
+      { prop: "accentColor", type: "string", defaultValue: "\"#3b82f6\"", description: "Accent color for modifier keys and screen." },
+      { prop: "secondaryAccent", type: "string", defaultValue: "\"#a855f7\"", description: "Secondary accent for the enter key." },
+      { prop: "scale", type: "number", defaultValue: "0.8", description: "Scale factor." },
+    ],
+  },
 };
