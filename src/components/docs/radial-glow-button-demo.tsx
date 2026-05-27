@@ -5,7 +5,7 @@ import { RadialGlowButton } from "@/components/ui/radial-glow-button";
 
 export function RadialGlowButtonDemo() {
   return (
-    <div className="flex w-full h-[400px] flex-col items-center justify-center bg-[#0d0914] rounded-xl overflow-hidden">
+    <div className="flex w-full h-[400px] flex-col items-center justify-center">
       <RadialGlowButton>
         Get Extension
       </RadialGlowButton>
