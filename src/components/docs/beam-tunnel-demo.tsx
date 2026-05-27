@@ -2,9 +2,7 @@ import { BeamTunnel } from "@/components/ui/beam-tunnel";
 
 export function BeamTunnelDemo() {
   return (
-    <div className="relative w-full h-[500px]">
-      <BeamTunnel className="absolute inset-0" />
-    </div>
+    <BeamTunnel className="w-full h-full min-h-[500px]" />
   );
 }
 
