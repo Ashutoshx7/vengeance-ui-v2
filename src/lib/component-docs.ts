@@ -935,4 +935,25 @@ export function Demo() {
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the component." },
     ],
   },
+
+  "beam-tunnel": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { BeamTunnel } from "@/components/ui/beam-tunnel"
+
+export function Demo() {
+  return (
+    <BeamTunnel className="h-[400px]">
+      <div className="bg-white/80 p-8 rounded-2xl backdrop-blur-md">
+        <h2>Hyperspace Jump</h2>
+      </div>
+    </BeamTunnel>
+  )
+}`,
+    props: [
+      { prop: "beamCount", type: "number", defaultValue: "3", description: "Number of beams per wall (top, bottom, left, right)." },
+      { prop: "beamColors", type: "string[]", defaultValue: "['linear-gradient(...)']", description: "Array of CSS gradients to randomly apply to beams." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the tunnel container." },
+    ],
+  },
 };
