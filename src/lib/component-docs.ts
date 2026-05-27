@@ -788,4 +788,22 @@ export function GenerateButtonDemo() {
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the button." },
     ],
   },
+
+  "radial-glow-button": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { RadialGlowButton } from "@/components/ui/radial-glow-button"
+
+export function RadialGlowButtonDemo() {
+  return (
+    <RadialGlowButton>
+      Get Extension
+    </RadialGlowButton>
+  )
+}`,
+    props: [
+      { prop: "children", type: "React.ReactNode", defaultValue: "'Get Extension'", description: "The content of the button." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the button." },
+    ],
+  },
 };

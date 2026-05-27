@@ -28,6 +28,7 @@ export const COMPONENT_CATEGORIES: ComponentCategory[] = [
         description: "An interactive, animated button for AI generation tasks.",
         isNew: true
       },
+      { name: "Radial Glow Button", slug: "radial-glow-button", description: "Button with animated radial gradient hover", componentName: "radial-glow-button", isNew: true },
       { name: "Social Flip Button", slug: "social-flip-button", description: "Social icon flip interaction", componentName: "social-flip-button", isNew: true },
       { name: "Liquid Metal", slug: "liquid-metal", description: "Metallic fluid shader effect", componentName: "liquid-metal", isNew: true },
       { name: "Creepy Button", slug: "creepy-button", description: "Button with tracking eyes", componentName: "creepy-button", isNew: true },

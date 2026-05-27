@@ -24,6 +24,7 @@ const DEMO_COMPONENTS: Record<string, React.ComponentType> = {
   "creepy-button": dynamic(() => import("@/components/docs/creepy-button-demo").then((m) => ({ default: m.CreepyButtonDemo })), { ssr: false, loading: LOADING }),
   "corner-button": dynamic(() => import("@/components/docs/corner-button-demo").then((m) => ({ default: m.CornerButtonDemo })), { ssr: false, loading: LOADING }),
   "generate-button": dynamic(() => import("@/components/docs/generate-button-demo").then((m) => ({ default: m.GenerateButtonDemo })), { ssr: false, loading: LOADING }),
+  "radial-glow-button": dynamic(() => import("@/components/docs/radial-glow-button-demo").then((m) => ({ default: m.RadialGlowButtonDemo })), { ssr: false, loading: LOADING }),
 
   "animated-rays": dynamic(() => import("@/components/docs/animated-rays").then((m) => ({ default: m.AnimatedRaysDemo })), { ssr: false, loading: LOADING }),
   "animated-number": dynamic(() => import("@/components/docs/animated-number").then((m) => ({ default: m.AnimatedNumberDemo })), { ssr: false, loading: LOADING }),
