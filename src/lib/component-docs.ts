@@ -806,4 +806,33 @@ export function RadialGlowButtonDemo() {
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the button." },
     ],
   },
+
+  "elastic-stack": {
+    dependencies: "npm install clsx tailwind-merge",
+    includeUtils: true,
+    usageCode: `import { ElasticStack } from "@/components/ui/elastic-stack"
+
+export function ElasticStackDemo() {
+  const items = Array.from({ length: 9 }).map((_, i) => ({
+    id: i,
+    content: i + 1,
+  }));
+
+  return (
+    <ElasticStack 
+      items={items} 
+      itemSize={70}
+      overlap={35}
+      pushForce={15}
+    />
+  )
+}`,
+    props: [
+      { prop: "items", type: "ElasticStackItem[]", defaultValue: "-", description: "Array of items with id, content, and optional color." },
+      { prop: "itemSize", type: "number", defaultValue: "80", description: "The base width and height of each item in pixels." },
+      { prop: "overlap", type: "number", defaultValue: "40", description: "The negative margin used to overlap items in pixels." },
+      { prop: "pushForce", type: "number", defaultValue: "15", description: "The multiplier defining how far sibling items are pushed on hover." },
+      { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes for the container." },
+    ],
+  },
 };
