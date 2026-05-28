@@ -11,7 +11,6 @@ import { Separator } from '@/components/ui/separator'
 import { Menu, X } from 'lucide-react'
 import { Dialog, DialogClose, DialogTitle, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import LogoIcon from '@/assets/logo/logo-icon'
-import Container from './container'
 
 const GitHubIcon = memo(function GitHubIcon() {
     return (
@@ -69,6 +68,7 @@ export const Navbar = memo(function Navbar() {
     // Pre-compute active states to avoid recalculating in render
     const activeStates = useMemo(() => ({
         heroSection: isActive('/hero-section'),
+        templates: isActive('/templates'),
         snippets: isActive('/snippets/button'),
         docs: isActive('/docs'),
     }), [isActive])
@@ -98,6 +98,19 @@ export const Navbar = memo(function Navbar() {
                                         prefetch={true}
                                         className="text-sm!">
                                         Blocks
+                                    </Link>
+                                </Button>
+
+                                <Button
+                                    asChild
+                                    size="sm"
+                                    variant="ghost"
+                                    className={cn('text-foreground/75 rounded-full', activeStates.templates && 'text-foreground')}>
+                                    <Link
+                                        href="/templates"
+                                        prefetch={true}
+                                        className="text-sm!">
+                                        Templates
                                     </Link>
                                 </Button>
 
@@ -203,6 +216,18 @@ export const Navbar = memo(function Navbar() {
                                                     className="text-sm!"
                                                     onClick={closeMenu}>
                                                     Blocks
+                                                </Link>
+                                            </Button>
+                                            <Button
+                                                asChild
+                                                size="sm"
+                                                variant="ghost"
+                                                className={cn('justify-start', activeStates.templates && 'bg-accent')}>
+                                                <Link
+                                                    href="/templates"
+                                                    className="text-sm!"
+                                                    onClick={closeMenu}>
+                                                    Templates
                                                 </Link>
                                             </Button>
                                             <Button
