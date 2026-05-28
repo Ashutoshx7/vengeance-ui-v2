@@ -15,6 +15,24 @@ const nextConfig: NextConfig = {
     reactStrictMode: true,
     poweredByHeader: false,
     compress: true,
+    experimental: {
+        // Tree-shake barrel-export packages for faster builds & smaller bundles
+        optimizePackageImports: [
+            'framer-motion',
+            '@phosphor-icons/react',
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-dropdown-menu',
+            '@radix-ui/react-context-menu',
+            '@radix-ui/react-menubar',
+            '@radix-ui/react-navigation-menu',
+            '@radix-ui/react-select',
+            '@radix-ui/react-tooltip',
+            '@radix-ui/react-popover',
+            '@radix-ui/react-hover-card',
+            'class-variance-authority',
+            'prism-react-renderer',
+        ],
+    },
 };
 
 export default nextConfig;

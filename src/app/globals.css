@@ -160,10 +160,30 @@
     @apply bg-background text-foreground;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body::-webkit-scrollbar {
     display: none;
+  }
+
+  /* GPU-accelerate common animated elements */
+  [class*="animate-"],
+  [class*="transition-"] {
+    will-change: auto;
+  }
+
+  /* Lazy-render off-screen sections for faster initial paint */
+  main > section:not(:first-child) {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+  }
+
+  /* Snappier link/button transitions */
+  a, button {
+    transition-duration: 120ms;
   }
 
   .line {

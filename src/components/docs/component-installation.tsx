@@ -5,7 +5,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Check, Copy, Terminal, Atom } from "lucide-react"
 import { useTheme } from "next-themes"
-import { Highlight, themes, PrismTheme } from "prism-react-renderer"
+import { Highlight, PrismTheme } from "prism-react-renderer"
 import { motion } from "framer-motion"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
@@ -86,12 +86,21 @@ const vibrantDarkTheme: PrismTheme = {
 
 function useCopy() {
     const [hasCopied, setHasCopied] = React.useState(false)
+    const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
 
-    const copy = (text: string) => {
+    const copy = React.useCallback((text: string) => {
         navigator.clipboard.writeText(text)
         setHasCopied(true)
-        setTimeout(() => setHasCopied(false), 2000)
-    }
+        if (timeoutRef.current) clearTimeout(timeoutRef.current)
+        timeoutRef.current = setTimeout(() => setHasCopied(false), 2000)
+    }, [])
+
+    // Cleanup timeout on unmount
+    React.useEffect(() => {
+        return () => {
+            if (timeoutRef.current) clearTimeout(timeoutRef.current)
+        }
+    }, [])
 
     return { hasCopied, copy }
 }
@@ -106,6 +115,45 @@ interface CodeBlockProps {
     nested?: boolean // New prop
 }
 
+const HighlightedCode = React.memo(function HighlightedCode({
+    code,
+    language,
+    theme,
+    showLineNumbers,
+}: {
+    code: string
+    language: string
+    theme: PrismTheme
+    showLineNumbers: boolean
+}) {
+    return (
+        <Highlight
+            theme={theme}
+            code={code}
+            language={language}
+        >
+            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+                <pre style={{ ...style, backgroundColor: 'transparent', margin: 0, padding: 0 }}>
+                    {tokens.map((line, i) => (
+                        <div key={i} {...getLineProps({ line })} className="table-row">
+                            {showLineNumbers && (
+                                <span className="table-cell select-none text-right w-8 pr-4 text-neutral-400/30 text-xs">
+                                    {i + 1}
+                                </span>
+                            )}
+                            <span className="table-cell">
+                                {line.map((token, key) => (
+                                    <span key={key} {...getTokenProps({ token })} />
+                                ))}
+                            </span>
+                        </div>
+                    ))}
+                </pre>
+            )}
+        </Highlight>
+    )
+})
+
 export function CodeBlock({ code, language = "bash", className, expandable = false, title, hideCopy, nested }: CodeBlockProps) {
     const { resolvedTheme } = useTheme()
     const { hasCopied, copy } = useCopy()
@@ -118,10 +166,6 @@ export function CodeBlock({ code, language = "bash", className, expandable = fal
 
     // Use light theme by default on server/initial render to prevent hydration mismatch
     const currentTheme = isMounted ? (resolvedTheme === 'dark' ? vibrantDarkTheme : vibrantLightTheme) : vibrantLightTheme
-
-    // Manual highlighting for bash if Prism fails being vibrant enough
-    // This simple hack ensures 'npm install' gets colored if it's plain text
-    // (Note: Prism usually does a good job if the language is correct, but let's trust the theme first)
 
     return (
         <div className={cn(
@@ -162,30 +206,12 @@ export function CodeBlock({ code, language = "bash", className, expandable = fal
                 !nested && "p-4",
                 expandable && !isExpanded && "max-h-32 overflow-hidden",
             )}>
-                <Highlight
-                    theme={currentTheme}
+                <HighlightedCode
                     code={code}
                     language={language}
-                >
-                    {({ className, style, tokens, getLineProps, getTokenProps }) => (
-                        <pre style={{ ...style, backgroundColor: 'transparent', margin: 0, padding: 0 }}>
-                            {tokens.map((line, i) => (
-                                <div key={i} {...getLineProps({ line })} className="table-row">
-                                    {!nested && ( // Only show line numbers if not nested (usually implies manual step)
-                                        <span className="table-cell select-none text-right w-8 pr-4 text-neutral-400/30 text-xs">
-                                            {i + 1}
-                                        </span>
-                                    )}
-                                    <span className="table-cell">
-                                        {line.map((token, key) => (
-                                            <span key={key} {...getTokenProps({ token })} />
-                                        ))}
-                                    </span>
-                                </div>
-                            ))}
-                        </pre>
-                    )}
-                </Highlight>
+                    theme={currentTheme}
+                    showLineNumbers={!nested}
+                />
             </div>
             {expandable && !isExpanded && (
                 <div className="absolute inset-0 flex items-center justify-center z-10 bg-gradient-to-t from-neutral-50 dark:from-zinc-950 via-neutral-50/40 dark:via-zinc-950/40 to-transparent pt-20">
@@ -242,13 +268,15 @@ export const Dependencies = ({ step, title, children, copyText, id }: Dependenci
 
     const textToCopy = extractCodeFromChildren
 
-    const processedChildren = React.Children.map(children, (child) => {
-        if (React.isValidElement(child) && child.type === CodeBlock) {
-            // Pass nested={true} to remove borders/styles from inner block
-            return React.cloneElement(child as React.ReactElement<any>, { hideCopy: true, nested: true })
-        }
-        return child
-    })
+    const processedChildren = React.useMemo(() => {
+        return React.Children.map(children, (child) => {
+            if (React.isValidElement(child) && child.type === CodeBlock) {
+                // Pass nested={true} to remove borders/styles from inner block
+                return React.cloneElement(child as React.ReactElement<any>, { hideCopy: true, nested: true })
+            }
+            return child
+        })
+    }, [children])
 
     // Subtle Lucide icons instead of emojis
     const StepIcon = React.useMemo(() => {
@@ -299,18 +327,26 @@ export function ComponentInstallation({ cli, manual, className }: ComponentInsta
     const [installType, setInstallType] = React.useState("npm")
     const { hasCopied, copy } = useCopy()
 
-    const getCommand = () => {
+    const getCommand = React.useCallback(() => {
         switch (installType) {
             case "pnpm": return cli.replace(/^npx/, 'pnpm dlx')
             case "bun": return cli.replace(/^npx/, 'bun x')
             case "yarn": return cli.replace(/^npx/, 'yarn dlx')
             default: return cli
         }
-    }
+    }, [cli, installType])
 
-    const copyCommand = () => {
+    const copyCommand = React.useCallback(() => {
         copy(getCommand())
-    }
+    }, [copy, getCommand])
+
+    // Pre-compute all command variants to avoid recalculating in TabsContent
+    const commands = React.useMemo(() => ({
+        npm: cli,
+        pnpm: cli.replace(/^npx/, 'pnpm dlx'),
+        bun: cli.replace(/^npx/, 'bun x'),
+        yarn: cli.replace(/^npx/, 'yarn dlx'),
+    }), [cli])
 
     return (
         <div className={cn("group relative my-8", className)}>
@@ -360,16 +396,16 @@ export function ComponentInstallation({ cli, manual, className }: ComponentInsta
                     </div>
                     <div className="bg-neutral-100 dark:bg-[#161616] p-0 [&_.group\/code]:border-0 [&_.group\/code]:shadow-none [&_.group\/code]:bg-transparent [&_.group\/code]:mb-0">
                         <TabsContent value="npm" className="!mt-0">
-                            <CodeBlock code={cli} className="border-0 shadow-none bg-transparent dark:bg-transparent rounded-none" />
+                            <CodeBlock code={commands.npm} className="border-0 shadow-none bg-transparent dark:bg-transparent rounded-none" />
                         </TabsContent>
                         <TabsContent value="pnpm" className="!mt-0">
-                            <CodeBlock code={cli.replace(/^npx/, 'pnpm dlx')} className="border-0 shadow-none bg-transparent dark:bg-transparent rounded-none" />
+                            <CodeBlock code={commands.pnpm} className="border-0 shadow-none bg-transparent dark:bg-transparent rounded-none" />
                         </TabsContent>
                         <TabsContent value="bun" className="!mt-0">
-                            <CodeBlock code={cli.replace(/^npx/, 'bun x')} className="border-0 shadow-none bg-transparent dark:bg-transparent rounded-none" />
+                            <CodeBlock code={commands.bun} className="border-0 shadow-none bg-transparent dark:bg-transparent rounded-none" />
                         </TabsContent>
                         <TabsContent value="yarn" className="!mt-0">
-                            <CodeBlock code={cli.replace(/^npx/, 'yarn dlx')} className="border-0 shadow-none bg-transparent dark:bg-transparent rounded-none" />
+                            <CodeBlock code={commands.yarn} className="border-0 shadow-none bg-transparent dark:bg-transparent rounded-none" />
                         </TabsContent>
                     </div>
                 </Tabs>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { AlignLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
@@ -83,36 +83,67 @@ function TOCItem({ item, index, active, items }: { item: TOCItemDef; index: numb
 export function TableOfContents() {
   const items = DEFAULT_ITEMS;
   const [activeIndex, setActiveIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
-  const activeColor = resolvedTheme === "dark" ? "#e4e4e7" : "#18181b";
+  const rafRef = useRef<number>(0);
+  const lastIndexRef = useRef(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      // If we've scrolled to the absolute bottom of the page, highlight the last item
-      if ((window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight - 50) {
+  useEffect(() => { setMounted(true); }, []);
+
+  // Guard against hydration mismatch: use neutral color until client mounts
+  const activeColor = mounted ? (resolvedTheme === "dark" ? "#e4e4e7" : "#18181b") : "#18181b";
+
+  // Use RAF-throttled scroll handler for smooth 60fps performance
+  const handleScroll = useCallback(() => {
+    // If we've scrolled to the absolute bottom of the page, highlight the last item
+    if ((window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight - 50) {
+      if (lastIndexRef.current !== items.length - 1) {
+        lastIndexRef.current = items.length - 1;
         setActiveIndex(items.length - 1);
-        return;
       }
+      return;
+    }
 
-      // Find the section that is currently visible
-      let currentIndex = 0;
-      for (let i = items.length - 1; i >= 0; i--) {
-        const element = document.getElementById(items[i].id);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 120) {
-            currentIndex = i;
-            break;
-          }
+    // Find the section that is currently visible
+    let currentIndex = 0;
+    for (let i = items.length - 1; i >= 0; i--) {
+      const element = document.getElementById(items[i].id);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        if (rect.top <= 120) {
+          currentIndex = i;
+          break;
         }
       }
+    }
+
+    // Only update state if it actually changed
+    if (lastIndexRef.current !== currentIndex) {
+      lastIndexRef.current = currentIndex;
       setActiveIndex(currentIndex);
+    }
+  }, [items]);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        rafRef.current = requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+      }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [items]);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafRef.current);
+    };
+  }, [handleScroll]);
 
   let d = "";
   const positions: [number, number][] = [];
@@ -138,7 +169,7 @@ export function TableOfContents() {
   const dotX = getLineOffset(items[activeIndex].depth) + 0.5;
   const dotY = (trackTop + trackBottom) / 2;
 
-  const transitionConfig = { type: "tween" as const, ease: "easeOut" as const, duration: 0.25 };
+  const transitionConfig = { type: "tween" as const, ease: "easeOut" as const, duration: 0.2 };
 
   return (
     <aside className="hidden xl:block sticky top-20 h-[calc(100vh-5rem)] overflow-y-auto py-6 pl-4 font-sans">
