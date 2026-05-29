@@ -2,13 +2,20 @@ import Link from "next/link";
 import {
   ArrowUpRight,
   Boxes,
+  Check,
   Command,
   Grid3X3,
+  Heart,
   Layers2,
+  Music2,
   MousePointer2,
+  Plus,
+  Search,
   Sparkles,
   Terminal,
+  Timer,
   Type,
+  Zap,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -211,14 +218,18 @@ function StaticPreview({ kind }: { kind: PreviewKind }) {
 function PreviewCell({
   family,
   index,
+  className = "",
 }: {
   family: LibraryFamily;
   index: number;
+  className?: string;
 }) {
   const Icon = family.icon;
 
   return (
-    <div className="group flex min-h-[204px] flex-col border-b border-r bg-background/35 p-4 transition-colors hover:bg-muted/15 md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0">
+    <div
+      className={`group relative z-10 flex min-h-[224px] flex-col border-b bg-background/35 p-4 transition-colors hover:bg-muted/15 ${className}`}
+    >
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <span className="flex size-7 items-center justify-center rounded-md border bg-background/70 text-muted-foreground">
@@ -263,6 +274,335 @@ function PreviewCell({
             ) : null}
           </span>
         ))}
+      </div>
+    </div>
+  );
+}
+
+function InteractionBuilderCell({
+  buttonsFamily,
+  interactiveFamily,
+}: {
+  buttonsFamily: LibraryFamily;
+  interactiveFamily: LibraryFamily;
+}) {
+  const checks = ["Hover states", "Input trails", "Theme ready"];
+
+  return (
+    <div className="group relative z-20 flex min-h-[492px] flex-col border-b bg-background/40 p-4 transition-colors hover:bg-muted/15 md:border-r lg:row-span-2 lg:min-h-0 lg:border-r">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <span className="flex size-7 items-center justify-center rounded-md border bg-background/70 text-muted-foreground">
+            <MousePointer2 className="size-3.5" />
+          </span>
+          <div>
+            <p className="font-orbitron text-sm font-medium tracking-normal text-foreground">
+              Interaction Builder
+            </p>
+            <p className="mt-1 text-[11px] text-muted-foreground">
+              Buttons + input driven
+            </p>
+          </div>
+        </div>
+        <span className="font-mono text-[10px] text-muted-foreground">
+          01/04
+        </span>
+      </div>
+
+      <div className="motion-panel relative mt-4 flex min-h-[356px] flex-1 items-center justify-center overflow-hidden rounded-xl border border-zinc-300/75 bg-[#dddddd] text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.78)] dark:border-white/10 dark:bg-[#151516] dark:text-zinc-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(255,255,255,0.86),transparent_43%),linear-gradient(180deg,rgba(255,255,255,0.26),rgba(255,255,255,0.03))] dark:hidden" />
+        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_48%_36%,rgba(255,255,255,0.11),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.01))] dark:block" />
+        <span className="absolute inset-x-[-22%] top-1/2 h-px bg-zinc-400/45 dark:bg-white/10" />
+
+        <div className="motion-island relative h-[90%] max-h-[338px] w-[86%] max-w-[430px] overflow-hidden rounded-[2.35rem] border border-white/70 bg-[#f4f4f4] shadow-[0_24px_72px_-42px_rgba(24,24,27,0.72),inset_0_1px_0_rgba(255,255,255,0.9)] dark:border-white/12 dark:bg-[#202123] dark:shadow-[0_24px_72px_-44px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.08)]">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(24,24,27,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.03)_1px,transparent_1px)] bg-[size:58px_58px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.052)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)]" />
+          <div className="absolute inset-y-0 left-1/2 w-px bg-zinc-300/55 dark:bg-white/8" />
+          <div className="absolute inset-x-0 top-[30%] h-px bg-zinc-300/45 dark:bg-white/8" />
+          <div className="absolute left-[-12%] top-[38%] h-32 w-20 rounded-r-2xl border border-zinc-300/55 bg-white/34 dark:border-white/8 dark:bg-white/[0.025]" />
+          <div className="absolute right-[-12%] top-[32%] h-28 w-20 rounded-l-2xl border border-zinc-300/55 bg-white/34 dark:border-white/8 dark:bg-white/[0.025]" />
+          <div className="absolute left-1/2 top-[36%] h-24 w-56 -translate-x-1/2 rounded-t-[1.45rem] border border-zinc-300/55 bg-white/32 dark:border-white/8 dark:bg-white/[0.025]" />
+          <div className="absolute bottom-[-12%] left-1/2 h-24 w-32 -translate-x-1/2 rounded-t-[1.7rem] border border-zinc-300/65 bg-white/32 dark:border-white/9 dark:bg-white/[0.025]" />
+
+          <div className="generator-prompt absolute left-1/2 top-[9%] z-30 flex h-11 w-[78%] -translate-x-1/2 items-center gap-2 rounded-full border border-white/90 bg-white/95 px-4 text-[10px] shadow-[0_14px_28px_-22px_rgba(24,24,27,0.78),0_2px_0_rgba(24,24,27,0.08)] dark:border-white/12 dark:bg-zinc-950/82 dark:shadow-[0_16px_36px_-28px_rgba(0,0,0,1)]">
+            <span className="min-w-0 flex-1 truncate font-mono text-[10px] text-zinc-800 dark:text-zinc-100">
+              Business gradient landing page
+            </span>
+            <span className="motion-caret h-3 w-px bg-blue-500" />
+            <Link
+              className="ml-auto flex size-8 items-center justify-center rounded-full bg-blue-500 text-white shadow-[0_10px_24px_-14px_rgba(59,130,246,0.9)]"
+              href={buttonsFamily.href}
+              title="Generate"
+            >
+              <Sparkles className="size-4" />
+            </Link>
+          </div>
+
+          <div className="generator-browser absolute bottom-[18%] right-[10%] top-[36%] z-10 w-[58%] rounded-[1.45rem] border border-white/85 bg-white/62 shadow-[0_22px_52px_-38px_rgba(24,24,27,0.82),inset_0_1px_0_rgba(255,255,255,0.88)] backdrop-blur-sm dark:border-white/10 dark:bg-zinc-950/34 dark:shadow-[0_22px_52px_-38px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.06)]">
+            <div className="absolute left-5 top-4 flex gap-1.5">
+              <span className="size-2 rounded-full bg-zinc-300 dark:bg-white/15" />
+              <span className="size-2 rounded-full bg-zinc-300 dark:bg-white/15" />
+              <span className="size-2 rounded-full bg-zinc-300 dark:bg-white/15" />
+            </div>
+            <Search className="absolute right-5 top-4 size-4 text-zinc-500 dark:text-zinc-500" />
+            <div className="absolute right-5 top-[40%] grid gap-2">
+              <span className="generator-mini block h-9 w-[5.6rem] rounded-lg border border-white/80 bg-white/88 shadow-sm dark:border-white/10 dark:bg-white/[0.055]" />
+              <span className="generator-mini generator-mini-b block h-9 w-[5.6rem] rounded-lg border border-white/80 bg-white/88 shadow-sm dark:border-white/10 dark:bg-white/[0.055]" />
+            </div>
+          </div>
+
+          <Link
+            className="generator-card absolute bottom-[14%] left-[24%] z-30 flex h-[48%] w-[38%] flex-col rounded-[1.35rem] border border-white/90 bg-white/90 p-4 shadow-[0_24px_54px_-36px_rgba(24,24,27,0.85),inset_0_1px_0_rgba(255,255,255,0.94)] backdrop-blur-sm dark:border-white/12 dark:bg-zinc-950/76 dark:shadow-[0_24px_54px_-36px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.08)]"
+            href={interactiveFamily.href}
+          >
+            <div className="pointer-events-none absolute inset-0 rounded-[1.35rem] bg-[radial-gradient(circle_at_80%_0%,rgba(96,165,250,0.5),transparent_24%),radial-gradient(circle_at_0%_30%,rgba(251,113,133,0.42),transparent_26%),radial-gradient(circle_at_0%_80%,rgba(251,146,60,0.38),transparent_24%)] opacity-70 dark:opacity-55" />
+            <span className="relative ml-auto flex size-8 items-center justify-center rounded-full border border-zinc-200 bg-zinc-100 dark:border-white/10 dark:bg-white/8">
+              <span className="size-4 rounded-full border-4 border-zinc-300 border-t-zinc-500 dark:border-white/16 dark:border-t-white/45" />
+            </span>
+            <span className="relative mt-1 max-w-[7rem] text-sm font-semibold leading-[0.95] text-zinc-950 dark:text-zinc-50">
+              About your project
+            </span>
+            <div className="relative mt-3 space-y-1.5">
+              {checks.map((check) => (
+                <span className="flex items-center gap-2" key={check}>
+                  <Check className="size-3.5 text-emerald-500" />
+                  <span className="h-1.5 w-16 rounded-full bg-zinc-300/80 dark:bg-white/16" />
+                </span>
+              ))}
+            </div>
+            <span className="relative mt-auto inline-flex h-8 items-center justify-center rounded-full border border-zinc-300 bg-zinc-200/80 font-mono text-[10px] text-zinc-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] transition-colors hover:bg-zinc-300/80 dark:border-white/10 dark:bg-white/10 dark:text-zinc-100 dark:hover:bg-white/16">
+              Generate
+            </span>
+          </Link>
+        </div>
+      </div>
+
+      <div className="mt-4 grid gap-3 text-[11px] text-muted-foreground sm:grid-cols-2">
+        <Link
+          className="rounded-md border bg-background/45 px-3 py-2 transition-colors hover:border-foreground/20 hover:text-foreground"
+          href={buttonsFamily.href}
+        >
+          <span className="font-orbitron text-xs text-foreground">
+            {buttonsFamily.name}
+          </span>
+          <span className="mt-1 block">{buttonsFamily.meta}</span>
+        </Link>
+        <Link
+          className="rounded-md border bg-background/45 px-3 py-2 transition-colors hover:border-foreground/20 hover:text-foreground"
+          href={interactiveFamily.href}
+        >
+          <span className="font-orbitron text-xs text-foreground">
+            {interactiveFamily.name}
+          </span>
+          <span className="mt-1 block">{interactiveFamily.meta}</span>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+function MotionHubCell({
+  textFamily,
+  marqueeFamily,
+}: {
+  textFamily: LibraryFamily;
+  marqueeFamily: LibraryFamily;
+}) {
+  const rightNodes = [
+    {
+      icon: Type,
+      label: "Flip",
+      href: textFamily.items[0].href,
+      className: "text-blue-500",
+    },
+    {
+      icon: Sparkles,
+      label: "Morph",
+      href: textFamily.items[2].href,
+      className: "text-fuchsia-500",
+    },
+    {
+      icon: Layers2,
+      label: "Tip",
+      href: marqueeFamily.items[1].href,
+      className: "text-orange-500",
+    },
+    {
+      icon: Zap,
+      label: "Cursor",
+      href: marqueeFamily.items[2].href,
+      className: "text-cyan-500",
+    },
+    {
+      icon: Music2,
+      label: "Slider",
+      href: marqueeFamily.items[0].href,
+      className: "text-emerald-500",
+    },
+  ];
+
+  return (
+    <div className="group relative z-20 flex min-h-[492px] flex-col border-b bg-background/40 p-4 transition-colors hover:bg-muted/15 lg:row-span-2 lg:min-h-0 lg:border-x">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <span className="flex size-7 items-center justify-center rounded-md border bg-background/70 text-muted-foreground">
+            <Layers2 className="size-3.5" />
+          </span>
+          <div>
+            <p className="font-orbitron text-sm font-medium tracking-normal text-foreground">
+              Motion Hub
+            </p>
+            <p className="mt-1 text-[11px] text-muted-foreground">
+              Text motion + micro feedback
+            </p>
+          </div>
+        </div>
+        <span className="font-mono text-[10px] text-muted-foreground">
+          02/05
+        </span>
+      </div>
+
+      <div className="motion-panel relative mt-4 flex min-h-[356px] flex-1 items-center justify-center overflow-hidden rounded-xl border border-zinc-300/75 bg-[#dedede] text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.78)] dark:border-white/10 dark:bg-[#151516] dark:text-zinc-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(255,255,255,0.82),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.22),rgba(255,255,255,0.03))] dark:hidden" />
+        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_48%_36%,rgba(255,255,255,0.1),transparent_42%),linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.01))] dark:block" />
+        <span className="absolute inset-x-[-22%] top-1/2 h-px bg-zinc-400/45 dark:bg-white/10" />
+
+        <div className="motion-island relative h-[88%] max-h-[334px] w-[84%] max-w-[410px] overflow-hidden rounded-[2.15rem] border border-white/70 bg-[#f2f2f2] shadow-[0_24px_72px_-40px_rgba(24,24,27,0.72),inset_0_1px_0_rgba(255,255,255,0.88)] dark:border-white/12 dark:bg-[#202123] dark:shadow-[0_24px_72px_-44px_rgba(0,0,0,0.95),inset_0_1px_0_rgba(255,255,255,0.08)]">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(24,24,27,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.035)_1px,transparent_1px)] bg-[size:58px_58px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.052)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)]" />
+          <div className="absolute inset-y-0 left-[20%] w-px bg-zinc-300/75 dark:bg-white/10" />
+          <div className="absolute inset-y-0 left-[36%] w-px bg-zinc-300/60 dark:bg-white/9" />
+          <div className="absolute inset-x-0 top-1/2 h-px bg-zinc-300/80 dark:bg-white/10" />
+          <div className="absolute left-1/2 top-[-10%] h-20 w-28 -translate-x-1/2 rounded-b-[1.7rem] border border-zinc-300/70 bg-white/30 dark:border-white/8 dark:bg-white/[0.025]" />
+          <div className="absolute bottom-[-10%] left-1/2 h-20 w-28 -translate-x-1/2 rounded-t-[1.7rem] border border-zinc-300/70 bg-white/30 dark:border-white/8 dark:bg-white/[0.025]" />
+          <div className="absolute left-1/2 top-[18%] h-24 w-28 -translate-x-1/2 rounded-2xl border border-zinc-300/70 bg-white/34 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)] dark:border-white/9 dark:bg-white/[0.03]">
+            <span className="absolute left-7 top-1/2 h-1 w-9 -translate-y-1/2 rounded-full bg-zinc-300 dark:bg-white/14" />
+            <span className="absolute left-7 top-[58%] h-1 w-16 rounded-full bg-zinc-200 dark:bg-white/8" />
+          </div>
+          <div className="absolute bottom-[15%] left-1/2 h-24 w-28 -translate-x-1/2 rounded-2xl border border-zinc-300/70 bg-white/34 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)] dark:border-white/9 dark:bg-white/[0.03]">
+            <span className="absolute left-7 top-[58%] h-1 w-9 rounded-full bg-zinc-300 dark:bg-white/14" />
+            <span className="absolute left-7 top-[66%] h-1 w-16 rounded-full bg-zinc-200 dark:bg-white/8" />
+          </div>
+
+          <svg
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full text-zinc-300/95 dark:text-white/14"
+            preserveAspectRatio="none"
+            viewBox="0 0 100 100"
+          >
+            <path
+              className="motion-path"
+              d="M0 50H38"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.55"
+            />
+            <path
+              className="motion-path motion-path-b"
+              d="M56 50C64 50 63 25 77 25"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.55"
+            />
+            <path
+              className="motion-path motion-path-c"
+              d="M56 50C65 50 64 38 77 38"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.55"
+            />
+            <path
+              className="motion-path"
+              d="M56 50H100"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.55"
+            />
+            <path
+              className="motion-path motion-path-b"
+              d="M56 50C65 50 64 62 77 62"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.55"
+            />
+            <path
+              className="motion-path motion-path-c"
+              d="M56 50C64 50 63 75 77 75"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.55"
+            />
+          </svg>
+
+          <div className="motion-rail absolute left-[11%] top-1/2 z-30 flex -translate-y-1/2 flex-col items-center gap-3 rounded-full border border-zinc-200 bg-white/86 p-2 shadow-[0_18px_46px_-30px_rgba(24,24,27,0.72)] backdrop-blur-sm dark:border-white/10 dark:bg-zinc-950/80 dark:shadow-[0_18px_46px_-30px_rgba(0,0,0,1)]">
+            {[Grid3X3, Heart, Timer, Music2].map((Icon, index) => (
+              <span
+                className={`flex size-8 items-center justify-center rounded-full text-zinc-500 transition-colors ${
+                  index === 2
+                    ? "bg-zinc-200 text-zinc-700 shadow-sm dark:bg-white/12 dark:text-zinc-100"
+                    : "dark:text-zinc-500"
+                }`}
+                key={index}
+              >
+                <Icon className="size-3.5" />
+              </span>
+            ))}
+            <span className="flex size-9 items-center justify-center rounded-full bg-blue-500 text-white shadow-[0_12px_30px_-16px_rgba(59,130,246,0.9)]">
+              <Plus className="size-4" />
+            </span>
+          </div>
+
+          <div className="absolute left-[25%] top-[55%] z-30 rounded-md border border-zinc-200 bg-white px-2 py-1 font-mono text-[10px] text-zinc-900 shadow-lg dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-100">
+            UI8
+          </div>
+
+          <div className="motion-core absolute left-1/2 top-1/2 z-30 flex size-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[1.65rem] border border-white/90 bg-white shadow-[0_22px_52px_-32px_rgba(24,24,27,0.78),inset_0_1px_0_rgba(255,255,255,1)] dark:border-white/12 dark:bg-[#25262a] dark:shadow-[0_22px_52px_-34px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.1)]">
+            <div className="motion-core-ring absolute inset-2 rounded-[1.35rem] bg-[conic-gradient(from_120deg,transparent_0_33%,#60a5fa_42%,#7c3aed_54%,#fb7185_68%,transparent_78%)] opacity-95" />
+            <Link
+              className="relative flex size-20 items-center justify-center rounded-full border border-zinc-800 bg-zinc-950 font-mono text-[10px] text-white shadow-inner"
+              href={textFamily.href}
+            >
+              thinking...
+              <span className="motion-caret ml-0.5 h-3 w-px bg-cyan-300" />
+            </Link>
+          </div>
+
+          <div className="absolute right-[11%] top-1/2 z-30 flex -translate-y-1/2 flex-col gap-3">
+            {rightNodes.map((node, index) => {
+              const Icon = node.icon;
+              return (
+                <Link
+                  className="motion-node flex size-12 items-center justify-center rounded-full border border-white/80 bg-white shadow-[0_18px_45px_-32px_rgba(24,24,27,0.74)] transition-transform hover:-translate-y-0.5 dark:border-white/10 dark:bg-zinc-950/88 dark:shadow-[0_18px_45px_-30px_rgba(0,0,0,1)]"
+                  href={node.href}
+                  key={node.label}
+                  style={{ animationDelay: `${index * -0.55}s` }}
+                  title={node.label}
+                >
+                  <Icon className={`size-4 ${node.className}`} />
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-4 grid gap-3 text-[11px] text-muted-foreground sm:grid-cols-2">
+        <Link
+          className="rounded-md border bg-background/45 px-3 py-2 transition-colors hover:border-foreground/20 hover:text-foreground"
+          href={textFamily.href}
+        >
+          <span className="font-orbitron text-xs text-foreground">
+            {textFamily.name}
+          </span>
+          <span className="mt-1 block">{textFamily.meta}</span>
+        </Link>
+        <Link
+          className="rounded-md border bg-background/45 px-3 py-2 transition-colors hover:border-foreground/20 hover:text-foreground"
+          href={marqueeFamily.href}
+        >
+          <span className="font-orbitron text-xs text-foreground">
+            {marqueeFamily.name}
+          </span>
+          <span className="mt-1 block">{marqueeFamily.meta}</span>
+        </Link>
       </div>
     </div>
   );
@@ -317,12 +657,61 @@ function IntroBand() {
   );
 }
 
-function PreviewMatrix() {
+function FlowLayer() {
+  const dataPath =
+    "M6 50 H82 C96 50 96 100 114 100 H150 C174 100 174 50 208 50 H294 C280 50 280 150 260 150 H208 C174 150 174 100 150 100 C126 100 126 150 92 150 H6";
+
   return (
-    <div className="grid border-b md:grid-cols-2 lg:grid-cols-3">
-      {libraryFamilies.map((family, index) => (
-        <PreviewCell family={family} index={index} key={family.name} />
-      ))}
+    <svg
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 z-[15] hidden h-full w-full overflow-visible text-sky-500/24 dark:text-sky-300/26 lg:block"
+      preserveAspectRatio="none"
+      viewBox="0 0 300 200"
+    >
+      <g
+        className="flow-network"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="0.42"
+        vectorEffect="non-scaling-stroke"
+      >
+        <path d="M6 50 H82 C96 50 96 100 114 100 H150" />
+        <path d="M150 100 C174 100 174 50 208 50 H294" />
+        <path d="M150 100 C174 100 174 150 208 150 H294" />
+        <path d="M150 100 C126 100 126 150 92 150 H6" />
+        <path d={dataPath} className="flow-route" />
+      </g>
+      <g className="flow-points" fill="currentColor">
+        {[0, -1.4, -2.8].map((delay) => (
+          <circle className="flow-dot" key={delay} r="1.35">
+            <animateMotion
+              begin={`${delay}s`}
+              dur="7.2s"
+              path={dataPath}
+              repeatCount="indefinite"
+            />
+          </circle>
+        ))}
+      </g>
+    </svg>
+  );
+}
+
+function PreviewMatrix() {
+  const [buttons, textMotion, layout, interactive, tooltipMarquee, scenes] =
+    libraryFamilies;
+
+  return (
+    <div className="relative grid border-b md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[246px_246px]">
+      <FlowLayer />
+      <InteractionBuilderCell
+        buttonsFamily={buttons}
+        interactiveFamily={interactive}
+      />
+      <MotionHubCell textFamily={textMotion} marqueeFamily={tooltipMarquee} />
+      <PreviewCell className="md:border-r lg:border-r-0" family={layout} index={2} />
+      <PreviewCell className="lg:border-b-0" family={scenes} index={5} />
     </div>
   );
 }
@@ -394,6 +783,62 @@ export default function LandingPageGrid() {
           to { transform: rotate(360deg); opacity: 0.18; }
         }
 
+        @keyframes motion-core-ring {
+          from { transform: rotate(0deg) scale(1); }
+          50% { transform: rotate(180deg) scale(1.04); }
+          to { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes motion-caret {
+          0%, 42% { opacity: 1; }
+          43%, 100% { opacity: 0; }
+        }
+
+        @keyframes motion-node {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-4px); }
+        }
+
+        @keyframes motion-path {
+          0%, 100% { opacity: 0.34; stroke-dashoffset: 0; }
+          50% { opacity: 0.85; stroke-dashoffset: -10; }
+        }
+
+        @keyframes motion-core {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); }
+          50% { transform: translate(-50%, -51.5%) scale(1.015); }
+        }
+
+        @keyframes motion-island {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-2px); }
+        }
+
+        @keyframes flow-route {
+          from { stroke-dashoffset: 0; }
+          to { stroke-dashoffset: -24; }
+        }
+
+        @keyframes flow-dot {
+          0%, 100% { opacity: 0.18; }
+          18%, 76% { opacity: 0.95; }
+        }
+
+        @keyframes generator-prompt {
+          0%, 100% { transform: translateX(-50%) translateY(0); }
+          50% { transform: translateX(-50%) translateY(-2px); }
+        }
+
+        @keyframes generator-card {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-3px); }
+        }
+
+        @keyframes generator-mini {
+          0%, 100% { opacity: 0.74; transform: translateX(0); }
+          50% { opacity: 1; transform: translateX(-3px); }
+        }
+
         .preview-shine::after {
           content: "";
           position: absolute;
@@ -414,6 +859,35 @@ export default function LandingPageGrid() {
         .preview-cursor { animation: preview-cursor 3.8s ease-in-out infinite; }
         .preview-ray { animation: preview-ray 15s linear infinite; }
         .preview-ray-delay { animation-delay: -5.5s; }
+        .motion-core-ring { animation: motion-core-ring 9s linear infinite; }
+        .motion-caret { animation: motion-caret 1.05s steps(1) infinite; }
+        .motion-node { animation: motion-node 4.5s ease-in-out infinite; }
+        .motion-core { animation: motion-core 5.8s ease-in-out infinite; }
+        .motion-island { animation: motion-island 7s ease-in-out infinite; }
+        .motion-path {
+          animation: motion-path 5.8s ease-in-out infinite;
+          stroke-dasharray: 5 6;
+          stroke-linecap: round;
+        }
+        .motion-path-b { animation-delay: -1.2s; }
+        .motion-path-c { animation-delay: -2.4s; }
+        .flow-network path { opacity: 0.34; }
+        .flow-network .flow-route {
+          animation: flow-route 7.2s linear infinite;
+          opacity: 0.72;
+          stroke-dasharray: 6 8;
+        }
+        .flow-dot {
+          animation: flow-dot 7.2s ease-in-out infinite;
+          filter: drop-shadow(0 0 6px currentColor);
+        }
+        .flow-points .flow-dot:nth-child(2) { animation-delay: -1.4s; }
+        .flow-points .flow-dot:nth-child(3) { animation-delay: -2.8s; }
+        .dark .flow-network path { opacity: 0.42; }
+        .generator-prompt { animation: generator-prompt 6.8s ease-in-out infinite; }
+        .generator-card { animation: generator-card 7.4s ease-in-out infinite; }
+        .generator-mini { animation: generator-mini 5.4s ease-in-out infinite; }
+        .generator-mini-b { animation-delay: -2.2s; }
 
         @media (prefers-reduced-motion: reduce) {
           .preview-shine::after,
@@ -421,7 +895,18 @@ export default function LandingPageGrid() {
           .preview-marquee,
           .preview-pop,
           .preview-cursor,
-          .preview-ray {
+          .preview-ray,
+          .motion-core-ring,
+          .motion-caret,
+          .motion-node,
+          .motion-core,
+          .motion-island,
+          .motion-path,
+          .flow-network .flow-route,
+          .flow-dot,
+          .generator-prompt,
+          .generator-card,
+          .generator-mini {
             animation: none;
           }
         }
