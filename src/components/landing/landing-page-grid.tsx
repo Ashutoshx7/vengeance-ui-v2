@@ -1,12 +1,18 @@
 import Link from "next/link";
 import {
   ArrowUpRight,
+  BarChart3,
   Boxes,
   Check,
+  Code2,
   Command,
+  FileText,
+  Flag,
   Grid3X3,
   Heart,
+  ImageIcon,
   Layers2,
+  MessageCircle,
   Music2,
   MousePointer2,
   Plus,
@@ -41,8 +47,8 @@ type LibraryFamily = {
 
 const libraryFamilies: LibraryFamily[] = [
   {
-    name: "Buttons",
-    meta: "Hover, click, glow",
+    name: "Button Kit",
+    meta: "Hover, glow, press",
     href: "/components/my-animated-button",
     icon: MousePointer2,
     preview: "buttons",
@@ -53,7 +59,7 @@ const libraryFamilies: LibraryFamily[] = [
     ],
   },
   {
-    name: "Text Motion",
+    name: "Motion Type",
     meta: "Flip, fade, morph",
     href: "/components/flip-text",
     icon: Type,
@@ -65,8 +71,8 @@ const libraryFamilies: LibraryFamily[] = [
     ],
   },
   {
-    name: "Layout Systems",
-    meta: "Cards and grids",
+    name: "Bento Layouts",
+    meta: "Grid, bento, stack",
     href: "/components/staggered-grid",
     icon: Grid3X3,
     preview: "layout",
@@ -77,8 +83,8 @@ const libraryFamilies: LibraryFamily[] = [
     ],
   },
   {
-    name: "Interactive",
-    meta: "Input driven",
+    name: "Input Effects",
+    meta: "Cursor, trail, keys",
     href: "/components/pixelated-image-trail",
     icon: Sparkles,
     preview: "interactive",
@@ -89,8 +95,8 @@ const libraryFamilies: LibraryFamily[] = [
     ],
   },
   {
-    name: "Tooltip Marquee",
-    meta: "Micro motion",
+    name: "Tooltip Rails",
+    meta: "Tooltip + marquee",
     href: "/components/logo-slider",
     icon: Layers2,
     preview: "marquee",
@@ -101,8 +107,8 @@ const libraryFamilies: LibraryFamily[] = [
     ],
   },
   {
-    name: "Scene Layers",
-    meta: "Background motion",
+    name: "Scene Fields",
+    meta: "Rays, grids, lines",
     href: "/components/animated-rays",
     icon: Boxes,
     preview: "background",
@@ -127,158 +133,6 @@ const quickPicks = [
   { name: "Kinetic Loader", href: "/components/kinetic-text-loader" },
 ];
 
-function StaticPreview({ kind }: { kind: PreviewKind }) {
-  if (kind === "buttons") {
-    return (
-      <div className="flex h-full items-center justify-center gap-2 px-3">
-        <span className="preview-shine relative overflow-hidden rounded-md border bg-background px-3 py-2 text-[10px] font-medium text-foreground">
-          Hover
-        </span>
-        <span className="preview-glow rounded-md border border-cyan-300/50 px-3 py-2 text-[10px] font-semibold text-white shadow-[0_14px_30px_-24px_rgba(34,211,238,0.85)]">
-          Glow
-        </span>
-        <span className="rounded-md border bg-foreground/90 px-3 py-2 text-[10px] font-medium text-background shadow-[0_4px_0_rgba(113,113,122,0.22)]">
-          Press
-        </span>
-      </div>
-    );
-  }
-
-  if (kind === "text") {
-    return (
-      <div className="flex h-full items-center justify-between px-5">
-        <span className="font-orbitron text-lg font-semibold tracking-normal text-foreground">
-          FLIP
-        </span>
-        <span className="h-9 w-px bg-border" />
-        <span className="bg-linear-to-r from-foreground via-muted-foreground to-foreground bg-clip-text font-orbitron text-lg font-semibold tracking-normal text-transparent">
-          MORPH
-        </span>
-      </div>
-    );
-  }
-
-  if (kind === "layout") {
-    return (
-      <div className="grid h-full grid-cols-5 grid-rows-3 gap-1.5 p-3">
-        <span className="col-span-2 row-span-2 rounded-sm border bg-background/80" />
-        <span className="col-span-3 rounded-sm border bg-background/60" />
-        <span className="col-span-1 rounded-sm border bg-muted/70" />
-        <span className="col-span-2 row-span-2 rounded-sm border bg-foreground/80" />
-        <span className="col-span-3 rounded-sm border bg-background/60" />
-      </div>
-    );
-  }
-
-  if (kind === "interactive") {
-    return (
-      <div className="relative h-full overflow-hidden">
-        <span className="absolute left-5 top-5 size-10 rounded-md border bg-background" />
-        <span className="absolute right-6 top-6 size-12 rounded-md border bg-muted/55" />
-        <span className="absolute bottom-5 left-1/2 size-10 -translate-x-1/2 rounded-md border bg-background" />
-        <span className="absolute left-8 top-9 h-px w-32 origin-left rotate-[16deg] bg-border" />
-        <span className="preview-cursor absolute left-[57%] top-[44%] size-2 rounded-full bg-foreground" />
-      </div>
-    );
-  }
-
-  if (kind === "marquee") {
-    return (
-      <div className="flex h-full flex-col justify-center gap-3 overflow-hidden px-3">
-        <div className="preview-marquee flex w-max gap-2">
-          {["Logo", "Tooltip", "Cursor", "Avatar", "Slider", "Logo"].map(
-            (item, index) => (
-              <span
-                className="rounded-md border bg-background px-2.5 py-1 text-[10px] text-muted-foreground"
-                key={`${item}-${index}`}
-              >
-                {item}
-              </span>
-            )
-          )}
-        </div>
-        <span className="preview-pop ml-12 w-fit rounded-md border bg-foreground px-2.5 py-1 text-[10px] text-background">
-          shared preview
-        </span>
-      </div>
-    );
-  }
-
-  return (
-    <div className="relative h-full overflow-hidden">
-      <span className="absolute inset-x-4 top-1/2 h-px bg-border" />
-      <span className="absolute left-1/2 top-4 h-[calc(100%-2rem)] w-px bg-border" />
-      <span className="absolute left-1/2 top-1/2 size-24 -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-sm border" />
-      <span className="preview-ray absolute left-1/2 top-1/2 h-px w-24 origin-left bg-linear-to-r from-foreground/45 to-transparent" />
-      <span className="preview-ray preview-ray-delay absolute left-1/2 top-1/2 h-px w-20 origin-left bg-linear-to-r from-cyan-400/60 to-transparent" />
-    </div>
-  );
-}
-
-function PreviewCell({
-  family,
-  index,
-  className = "",
-}: {
-  family: LibraryFamily;
-  index: number;
-  className?: string;
-}) {
-  const Icon = family.icon;
-
-  return (
-    <div
-      className={`group relative z-10 flex min-h-[224px] flex-col border-b bg-background/35 p-4 transition-colors hover:bg-muted/15 ${className}`}
-    >
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          <span className="flex size-7 items-center justify-center rounded-md border bg-background/70 text-muted-foreground">
-            <Icon className="size-3.5" />
-          </span>
-          <div>
-            <Link
-              className="font-orbitron text-sm font-medium tracking-normal text-foreground"
-              href={family.href}
-            >
-              {family.name}
-            </Link>
-            <p className="mt-1 text-[11px] text-muted-foreground">
-              {family.meta}
-            </p>
-          </div>
-        </div>
-        <span className="font-mono text-[10px] text-muted-foreground">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-      </div>
-      <Link
-        className="mt-4 block h-[76px] overflow-hidden rounded-md border bg-muted/10 transition-colors group-hover:bg-muted/25"
-        href={family.href}
-      >
-        <StaticPreview kind={family.preview} />
-      </Link>
-
-      <div className="mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 pt-4 text-[11px] text-muted-foreground">
-        {family.items.map((item, itemIndex) => (
-          <span className="inline-flex items-center gap-x-2" key={item.name}>
-            <Link
-              className="transition-colors hover:text-foreground"
-              href={item.href}
-            >
-              {item.name}
-            </Link>
-            {itemIndex < family.items.length - 1 ? (
-              <span className="text-border" aria-hidden="true">
-                /
-              </span>
-            ) : null}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function InteractionBuilderCell({
   buttonsFamily,
   interactiveFamily,
@@ -286,10 +140,10 @@ function InteractionBuilderCell({
   buttonsFamily: LibraryFamily;
   interactiveFamily: LibraryFamily;
 }) {
-  const checks = ["Hover states", "Input trails", "Theme ready"];
+  const checks = ["CLI install", "Preview state", "Dark ready"];
 
   return (
-    <div className="group relative z-20 flex min-h-[492px] flex-col border-b bg-background/40 p-4 transition-colors hover:bg-muted/15 md:border-r lg:row-span-2 lg:min-h-0 lg:border-r">
+    <div className="group relative z-20 flex min-h-[492px] flex-col border-b bg-card/35 p-4 transition-colors hover:bg-muted/10 md:border-r lg:row-span-2 lg:min-h-0 lg:border-r">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <span className="flex size-7 items-center justify-center rounded-md border bg-background/70 text-muted-foreground">
@@ -297,19 +151,19 @@ function InteractionBuilderCell({
           </span>
           <div>
             <p className="font-orbitron text-sm font-medium tracking-normal text-foreground">
-              Interaction Builder
+              Button Forge
             </p>
             <p className="mt-1 text-[11px] text-muted-foreground">
-              Buttons + input driven
+              Buttons + input trails
             </p>
           </div>
         </div>
         <span className="font-mono text-[10px] text-muted-foreground">
-          01/04
+          01/03
         </span>
       </div>
 
-      <div className="motion-panel relative mt-4 flex min-h-[356px] flex-1 items-center justify-center overflow-hidden rounded-xl border border-zinc-300/75 bg-[#dddddd] text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.78)] dark:border-white/10 dark:bg-[#171719] dark:text-zinc-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+      <div className="motion-panel relative mt-4 flex min-h-[356px] flex-1 items-center justify-center overflow-hidden rounded-xl border border-border/90 bg-muted/70 text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.78)] dark:bg-zinc-950/75 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_34%,rgba(255,255,255,0.9),transparent_44%),linear-gradient(180deg,rgba(255,255,255,0.28),rgba(255,255,255,0.04))] dark:hidden" />
         <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_50%_34%,rgba(255,255,255,0.13),transparent_44%),linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.015))] dark:block" />
         <span className="absolute inset-x-[-22%] top-1/2 h-px bg-zinc-400/45 dark:bg-white/10" />
@@ -325,11 +179,11 @@ function InteractionBuilderCell({
 
           <div className="generator-prompt absolute inset-x-[12%] top-[8%] z-30 flex h-10 items-center gap-1.5 rounded-full border border-white/95 bg-white/95 py-1 pl-4 pr-1.5 shadow-[0_16px_30px_-22px_rgba(24,24,27,0.78),0_2px_0_rgba(24,24,27,0.08)] dark:border-white/12 dark:bg-zinc-950/84 dark:shadow-[0_16px_36px_-28px_rgba(0,0,0,1)]">
             <span className="min-w-0 flex-1 overflow-hidden whitespace-nowrap font-mono text-[7.5px] text-zinc-800 dark:text-zinc-100 sm:text-[8.5px]">
-              Business gradient landing page
+              Vengeance hover button set
             </span>
             <span className="motion-caret h-3 w-px bg-blue-500" />
             <Link
-              className="flex size-7 shrink-0 items-center justify-center rounded-full bg-blue-500 text-white shadow-[0_10px_24px_-14px_rgba(59,130,246,0.9)]"
+              className="flex size-7 shrink-0 items-center justify-center rounded-full bg-foreground text-background shadow-[0_10px_24px_-14px_rgba(24,24,27,0.55)] dark:shadow-[0_10px_24px_-14px_rgba(255,255,255,0.32)]"
               href={buttonsFamily.href}
               title="Generate"
             >
@@ -359,7 +213,7 @@ function InteractionBuilderCell({
               <span className="size-4 rounded-full border-4 border-zinc-300 border-t-zinc-500 dark:border-white/16 dark:border-t-white/45" />
             </span>
             <span className="relative mt-1 max-w-[7rem] text-[13px] font-semibold leading-[0.95] text-zinc-950 dark:text-zinc-50 sm:text-sm">
-              About your project
+              Component brief
             </span>
             <div className="relative mt-3 space-y-1.5">
               {checks.map((check) => (
@@ -370,7 +224,7 @@ function InteractionBuilderCell({
               ))}
             </div>
             <span className="relative mt-auto inline-flex h-8 items-center justify-center rounded-full border border-zinc-300 bg-zinc-200/80 font-mono text-[10px] text-zinc-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] transition-colors hover:bg-zinc-300/80 dark:border-white/10 dark:bg-white/10 dark:text-zinc-100 dark:hover:bg-white/16">
-              Generate
+              Open kit
             </span>
           </Link>
         </div>
@@ -441,7 +295,7 @@ function MotionHubCell({
   ];
 
   return (
-    <div className="group relative z-20 flex min-h-[492px] flex-col border-b bg-background/40 p-4 transition-colors hover:bg-muted/15 lg:row-span-2 lg:min-h-0 lg:border-x">
+    <div className="group relative z-20 flex min-h-[492px] flex-col border-b bg-card/35 p-4 transition-colors hover:bg-muted/10 lg:row-span-2 lg:min-h-0 lg:border-x">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <span className="flex size-7 items-center justify-center rounded-md border bg-background/70 text-muted-foreground">
@@ -449,41 +303,42 @@ function MotionHubCell({
           </span>
           <div>
             <p className="font-orbitron text-sm font-medium tracking-normal text-foreground">
-              Motion Hub
+              Motion Kernel
             </p>
             <p className="mt-1 text-[11px] text-muted-foreground">
-              Text motion + micro feedback
+              Type + tooltip signals
             </p>
           </div>
         </div>
         <span className="font-mono text-[10px] text-muted-foreground">
-          02/05
+          02/03
         </span>
       </div>
 
-      <div className="motion-panel relative mt-4 flex min-h-[342px] flex-1 items-center justify-center overflow-hidden rounded-xl border border-zinc-300/75 bg-[#d9d9d9] text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.78)] dark:border-white/10 dark:bg-[#d9d9d9] dark:text-zinc-900 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.72)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_36%,rgba(255,255,255,0.72),transparent_45%),linear-gradient(180deg,rgba(255,255,255,0.2),rgba(255,255,255,0.02))]" />
-        <span className="absolute inset-x-[-22%] top-1/2 h-px bg-zinc-400/45" />
+      <div className="motion-panel relative mt-4 flex min-h-[352px] flex-1 items-center justify-center overflow-hidden rounded-xl border border-border/90 bg-muted/70 text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.78)] dark:bg-zinc-950/75 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_36%,rgba(255,255,255,0.72),transparent_45%),linear-gradient(180deg,rgba(255,255,255,0.2),rgba(255,255,255,0.02))] dark:hidden" />
+        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_50%_36%,rgba(255,255,255,0.1),transparent_45%),linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.01))] dark:block" />
+        <span className="absolute inset-x-[-22%] top-1/2 h-px bg-zinc-400/45 dark:bg-white/10" />
 
-        <div className="motion-island relative h-[91%] max-h-[330px] w-[92%] max-w-[430px] overflow-hidden rounded-[2.75rem] border border-white/80 bg-[#f3f3f3] shadow-[0_24px_72px_-40px_rgba(24,24,27,0.62),inset_0_1px_0_rgba(255,255,255,0.92)]">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(24,24,27,0.052)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.034)_1px,transparent_1px)] bg-[size:58px_58px]" />
-          <div className="absolute inset-y-0 left-[20%] w-px bg-zinc-300/70" />
-          <div className="absolute inset-y-0 left-[36%] w-px bg-zinc-300/58" />
-          <div className="absolute inset-x-0 top-1/2 h-px bg-zinc-300/80" />
-          <div className="absolute left-1/2 top-[-10%] h-20 w-28 -translate-x-1/2 rounded-b-[1.7rem] border border-zinc-300/65 bg-white/28" />
-          <div className="absolute bottom-[-10%] left-1/2 h-20 w-28 -translate-x-1/2 rounded-t-[1.7rem] border border-zinc-300/65 bg-white/28" />
-          <div className="absolute left-1/2 top-[16%] h-28 w-32 -translate-x-1/2 rounded-[1.55rem] border border-zinc-300/65 bg-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
-            <span className="absolute left-8 top-1/2 h-1.5 w-10 -translate-y-1/2 rounded-full bg-zinc-300" />
-            <span className="absolute left-8 top-[59%] h-1 w-20 rounded-full bg-zinc-200" />
+        <div className="motion-island relative h-[91%] max-h-[336px] w-[92%] max-w-[430px] overflow-hidden rounded-[2.75rem] border border-white/80 bg-[#f3f3f3] shadow-[0_24px_72px_-40px_rgba(24,24,27,0.62),inset_0_1px_0_rgba(255,255,255,0.92)] dark:border-white/10 dark:bg-[#1b1c1f] dark:shadow-[0_24px_72px_-44px_rgba(0,0,0,0.9),inset_0_1px_0_rgba(255,255,255,0.07)]">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(24,24,27,0.052)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.034)_1px,transparent_1px)] bg-[size:58px_58px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.038)_1px,transparent_1px)]" />
+          <div className="absolute inset-y-0 left-[20%] w-px bg-zinc-300/70 dark:bg-white/10" />
+          <div className="absolute inset-y-0 left-[36%] w-px bg-zinc-300/58 dark:bg-white/8" />
+          <div className="absolute inset-x-0 top-1/2 h-px bg-zinc-300/80 dark:bg-white/10" />
+          <div className="absolute left-1/2 top-[-10%] h-20 w-28 -translate-x-1/2 rounded-b-[1.7rem] border border-zinc-300/65 bg-white/28 dark:border-white/8 dark:bg-white/[0.025]" />
+          <div className="absolute bottom-[-10%] left-1/2 h-20 w-28 -translate-x-1/2 rounded-t-[1.7rem] border border-zinc-300/65 bg-white/28 dark:border-white/8 dark:bg-white/[0.025]" />
+          <div className="absolute left-1/2 top-[16%] h-28 w-32 -translate-x-1/2 rounded-[1.55rem] border border-zinc-300/65 bg-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)] dark:border-white/8 dark:bg-white/[0.03]">
+            <span className="absolute left-8 top-1/2 h-1.5 w-10 -translate-y-1/2 rounded-full bg-zinc-300 dark:bg-white/14" />
+            <span className="absolute left-8 top-[59%] h-1 w-20 rounded-full bg-zinc-200 dark:bg-white/8" />
           </div>
-          <div className="absolute bottom-[13%] left-1/2 h-28 w-32 -translate-x-1/2 rounded-[1.55rem] border border-zinc-300/65 bg-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)]">
-            <span className="absolute left-8 top-[58%] h-1.5 w-10 rounded-full bg-zinc-300" />
-            <span className="absolute left-8 top-[67%] h-1 w-20 rounded-full bg-zinc-200" />
+          <div className="absolute bottom-[13%] left-1/2 h-28 w-32 -translate-x-1/2 rounded-[1.55rem] border border-zinc-300/65 bg-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.66)] dark:border-white/8 dark:bg-white/[0.03]">
+            <span className="absolute left-8 top-[58%] h-1.5 w-10 rounded-full bg-zinc-300 dark:bg-white/14" />
+            <span className="absolute left-8 top-[67%] h-1 w-20 rounded-full bg-zinc-200 dark:bg-white/8" />
           </div>
 
           <svg
             aria-hidden="true"
-            className="absolute inset-0 h-full w-full text-zinc-300/95"
+            className="absolute inset-0 h-full w-full text-zinc-300/95 dark:text-white/16"
             preserveAspectRatio="none"
             viewBox="0 0 100 100"
           >
@@ -531,12 +386,12 @@ function MotionHubCell({
             />
           </svg>
 
-          <div className="motion-rail absolute left-[21%] top-1/2 z-30 flex -translate-y-1/2 flex-col items-center gap-3 rounded-full border border-zinc-200 bg-white/90 p-2.5 shadow-[0_18px_46px_-30px_rgba(24,24,27,0.72)] backdrop-blur-sm">
+          <div className="motion-rail absolute left-[6%] top-1/2 z-30 flex -translate-y-1/2 flex-col items-center gap-3 rounded-full border border-zinc-200 bg-white/90 p-2.5 shadow-[0_18px_46px_-30px_rgba(24,24,27,0.72)] backdrop-blur-sm dark:border-white/10 dark:bg-zinc-950/80 dark:shadow-[0_18px_46px_-30px_rgba(0,0,0,1)]">
             {[Grid3X3, Heart, Timer, Music2].map((Icon, index) => (
               <span
-                className={`flex size-8 items-center justify-center rounded-full text-zinc-500 transition-colors ${
+                className={`flex size-8 items-center justify-center rounded-full text-zinc-500 transition-colors dark:text-zinc-400 ${
                   index === 2
-                    ? "bg-zinc-200 text-zinc-700 shadow-sm"
+                    ? "bg-zinc-200 text-zinc-700 shadow-sm dark:bg-white/12 dark:text-zinc-100"
                     : ""
                 }`}
                 key={index}
@@ -544,24 +399,26 @@ function MotionHubCell({
                 <Icon className="size-3.5" />
               </span>
             ))}
-            <span className="flex size-9 items-center justify-center rounded-full bg-blue-500 text-white shadow-[0_12px_30px_-16px_rgba(59,130,246,0.9)]">
+            <span className="flex size-9 items-center justify-center rounded-full bg-foreground text-background shadow-[0_12px_30px_-16px_rgba(24,24,27,0.7)] dark:shadow-[0_12px_30px_-16px_rgba(255,255,255,0.38)]">
               <Plus className="size-4" />
             </span>
           </div>
 
-          <MousePointer2 className="absolute left-[27%] top-[51%] z-40 size-6 fill-zinc-950 text-zinc-950" />
+          <MousePointer2 className="absolute left-[15%] top-[51%] z-40 size-6 fill-zinc-950 text-zinc-950 dark:fill-white dark:text-white" />
 
-          <div className="absolute left-[33%] top-[55%] z-40 rounded-md border border-zinc-200 bg-white px-2 py-1 font-mono text-[10px] text-zinc-900 shadow-lg">
-            UI8
+          <div className="absolute left-[22%] top-[55%] z-40 rounded-md border border-zinc-200 bg-white px-2 py-1 font-mono text-[10px] text-zinc-900 shadow-lg dark:border-white/10 dark:bg-zinc-950 dark:text-zinc-100">
+            VUI
           </div>
 
-          <div className="motion-core absolute left-[65%] top-[68%] z-30 flex size-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[1.75rem] border border-white/90 bg-white shadow-[0_24px_60px_-34px_rgba(24,24,27,0.8),inset_0_1px_0_rgba(255,255,255,1)]">
-            <div className="motion-core-ring absolute inset-2 rounded-[1.35rem] bg-[conic-gradient(from_120deg,transparent_0_33%,#60a5fa_42%,#7c3aed_54%,#fb7185_68%,transparent_78%)] opacity-95" />
+          <div className="motion-core absolute left-1/2 top-1/2 z-30 flex size-28 items-center justify-center rounded-[1.75rem] border border-white/90 bg-white shadow-[0_24px_60px_-34px_rgba(24,24,27,0.8),inset_0_1px_0_rgba(255,255,255,1)] dark:border-white/12 dark:bg-[#26272b] dark:shadow-[0_24px_60px_-34px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.09)]">
+            <div className="absolute left-1/2 top-1/2 size-[6.35rem] -translate-x-1/2 -translate-y-1/2 rounded-full">
+              <div className="motion-core-ring size-full rounded-full bg-[conic-gradient(from_145deg,transparent_0_24%,#60a5fa_36%,#7c3aed_50%,#fb7185_64%,#fbbf24_72%,transparent_86%)] opacity-95" />
+            </div>
             <Link
-              className="relative flex size-[5.4rem] items-center justify-center rounded-full border border-zinc-800 bg-zinc-950 font-mono text-[10px] text-white shadow-inner"
+              className="relative flex size-[5.4rem] items-center justify-center rounded-full border border-zinc-800 bg-zinc-950 font-mono text-[10px] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_10px_26px_-18px_rgba(0,0,0,0.75)]"
               href={textFamily.href}
             >
-              thinking...
+              indexing...
               <span className="motion-caret ml-0.5 h-3 w-px bg-cyan-300" />
             </Link>
           </div>
@@ -571,7 +428,7 @@ function MotionHubCell({
               const Icon = node.icon;
               return (
                 <Link
-                  className="motion-node flex size-12 items-center justify-center rounded-full border border-white/80 bg-white shadow-[0_18px_45px_-32px_rgba(24,24,27,0.74)] transition-transform hover:-translate-y-0.5"
+                  className="motion-node flex size-12 items-center justify-center rounded-full border border-white/80 bg-white shadow-[0_18px_45px_-32px_rgba(24,24,27,0.74)] transition-transform hover:-translate-y-0.5 dark:border-white/10 dark:bg-zinc-950/88 dark:shadow-[0_18px_45px_-30px_rgba(0,0,0,1)]"
                   href={node.href}
                   key={node.label}
                   style={{ animationDelay: `${index * -0.55}s` }}
@@ -609,19 +466,231 @@ function MotionHubCell({
   );
 }
 
+function SystemActionPill({
+  icon: Icon,
+  label,
+  href,
+  className,
+  iconClassName,
+  delay = "0s",
+}: {
+  icon: LucideIcon;
+  label: string;
+  href: string;
+  className: string;
+  iconClassName: string;
+  delay?: string;
+}) {
+  return (
+    <Link
+      className={`system-action absolute z-30 flex h-10 items-center gap-2 rounded-lg border border-white/85 bg-white/88 px-2.5 pr-4 font-mono text-[9px] text-zinc-800 shadow-[0_14px_36px_-26px_rgba(24,24,27,0.82),inset_0_1px_0_rgba(255,255,255,0.92)] backdrop-blur-sm transition-transform hover:-translate-y-0.5 dark:border-white/10 dark:bg-zinc-950/78 dark:text-zinc-100 dark:shadow-[0_14px_36px_-26px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.08)] ${className}`}
+      href={href}
+      style={{ animationDelay: delay }}
+    >
+      <span
+        className={`relative flex size-7 shrink-0 items-center justify-center rounded-md border bg-white shadow-sm dark:bg-white/[0.06] ${iconClassName}`}
+      >
+        <Icon className="size-3.5" />
+      </span>
+      <span className="whitespace-nowrap">{label}</span>
+    </Link>
+  );
+}
+
+function SystemComposerCell({
+  layoutFamily,
+  scenesFamily,
+}: {
+  layoutFamily: LibraryFamily;
+  scenesFamily: LibraryFamily;
+}) {
+  return (
+    <div className="group relative z-20 flex min-h-[492px] flex-col border-b bg-card/35 p-4 transition-colors hover:bg-muted/10 lg:row-span-2 lg:min-h-0">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <span className="flex size-7 items-center justify-center rounded-md border bg-background/70 text-muted-foreground">
+            <Grid3X3 className="size-3.5" />
+          </span>
+          <div>
+            <p className="font-orbitron text-sm font-medium tracking-normal text-foreground">
+              Registry Composer
+            </p>
+            <p className="mt-1 text-[11px] text-muted-foreground">
+              Layouts + install paths
+            </p>
+          </div>
+        </div>
+        <span className="font-mono text-[10px] text-muted-foreground">
+          03/03
+        </span>
+      </div>
+
+      <div className="motion-panel relative mt-4 flex min-h-[352px] flex-1 items-center justify-center overflow-hidden rounded-xl border border-border/90 bg-muted/70 text-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.78)] dark:bg-zinc-950/75 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.9),transparent_46%),linear-gradient(180deg,rgba(255,255,255,0.28),rgba(255,255,255,0.03))] dark:hidden" />
+        <div className="absolute inset-0 hidden bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.13),transparent_46%),linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.012))] dark:block" />
+
+        <div className="system-island relative h-[91%] max-h-[336px] w-[92%] max-w-[430px] overflow-hidden rounded-[2.75rem] border border-white/80 bg-[#f4f4f4] shadow-[0_24px_72px_-40px_rgba(24,24,27,0.62),inset_0_1px_0_rgba(255,255,255,0.92)] dark:border-white/10 dark:bg-[#1b1c1f] dark:shadow-[0_24px_72px_-44px_rgba(0,0,0,0.9),inset_0_1px_0_rgba(255,255,255,0.07)]">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(24,24,27,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(24,24,27,0.03)_1px,transparent_1px)] bg-[size:62px_62px] dark:bg-[linear-gradient(to_right,rgba(255,255,255,0.052)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)]" />
+          <span className="absolute inset-y-0 left-1/2 w-px border-l border-dashed border-zinc-300/75 dark:border-white/12" />
+          <span className="absolute inset-x-0 top-[34%] border-t border-dashed border-zinc-300/70 dark:border-white/12" />
+          <span className="absolute inset-x-0 top-[55%] border-t border-dashed border-zinc-300/58 dark:border-white/10" />
+          <div className="absolute left-1/2 top-[13%] h-16 w-28 -translate-x-1/2 rounded-b-[1.6rem] border border-zinc-300/60 bg-white/34 dark:border-white/8 dark:bg-white/[0.025]" />
+          <div className="absolute bottom-[-8%] left-1/2 h-20 w-28 -translate-x-1/2 rounded-t-[1.7rem] border border-zinc-300/60 bg-white/30 dark:border-white/8 dark:bg-white/[0.025]" />
+          <div className="absolute left-[-8%] top-[33%] h-28 w-24 rounded-r-[1.4rem] border border-zinc-300/58 bg-white/28 dark:border-white/8 dark:bg-white/[0.025]" />
+          <div className="absolute right-[-8%] top-[33%] h-28 w-24 rounded-l-[1.4rem] border border-zinc-300/58 bg-white/28 dark:border-white/8 dark:bg-white/[0.025]" />
+
+          <svg
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full text-zinc-300/95 dark:text-white/16"
+            preserveAspectRatio="none"
+            viewBox="0 0 100 100"
+          >
+            <path
+              className="system-path"
+              d="M0 33H30C38 33 36 50 47 50"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.55"
+            />
+            <path
+              className="system-path system-path-b"
+              d="M0 55H30C38 55 36 50 47 50"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.55"
+            />
+            <path
+              className="system-path system-path-c"
+              d="M0 68H30C39 68 36 50 47 50"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.55"
+            />
+            <path
+              className="system-path"
+              d="M53 50C64 50 62 33 100 33"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.55"
+            />
+            <path
+              className="system-path system-path-b"
+              d="M53 50C64 50 62 55 100 55"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.55"
+            />
+            <path
+              className="system-path system-path-c"
+              d="M53 50C64 50 62 68 100 68"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.55"
+            />
+          </svg>
+
+          <SystemActionPill
+            className="left-[-3%] top-[25%]"
+            delay="-0.4s"
+            href={scenesFamily.href}
+            icon={MessageCircle}
+            iconClassName="border-fuchsia-200 text-fuchsia-500 dark:border-fuchsia-400/25 dark:text-fuchsia-300"
+            label="Choose layer"
+          />
+          <SystemActionPill
+            className="left-[8%] top-[43%]"
+            delay="-1.1s"
+            href={layoutFamily.href}
+            icon={ImageIcon}
+            iconClassName="border-sky-200 text-sky-500 dark:border-sky-400/25 dark:text-sky-300"
+            label="Compose card"
+          />
+          <SystemActionPill
+            className="left-[-4%] top-[62%]"
+            delay="-1.8s"
+            href="/docs/cli"
+            icon={Code2}
+            iconClassName="border-emerald-200 text-emerald-500 dark:border-emerald-400/25 dark:text-emerald-300"
+            label="Copy CLI"
+          />
+
+          <SystemActionPill
+            className="right-[-4%] top-[25%]"
+            delay="-0.8s"
+            href={layoutFamily.href}
+            icon={Flag}
+            iconClassName="border-amber-200 text-amber-500 dark:border-amber-400/25 dark:text-amber-300"
+            label="Map layout"
+          />
+          <SystemActionPill
+            className="right-[9%] top-[43%]"
+            delay="-1.5s"
+            href={scenesFamily.items[0].href}
+            icon={FileText}
+            iconClassName="border-orange-200 text-orange-500 dark:border-orange-400/25 dark:text-orange-300"
+            label="Preview scene"
+          />
+          <SystemActionPill
+            className="right-[-3%] top-[62%]"
+            delay="-2.2s"
+            href={layoutFamily.items[0].href}
+            icon={BarChart3}
+            iconClassName="border-violet-200 text-violet-500 dark:border-violet-400/25 dark:text-violet-300"
+            label="Ship ready"
+          />
+
+          <Link
+            className="system-card absolute left-1/2 top-1/2 z-40 flex h-[60%] w-[30%] min-w-[118px] max-w-[142px] flex-col rounded-[1.55rem] border border-white/90 bg-white/92 p-3 shadow-[0_28px_64px_-40px_rgba(24,24,27,0.9),inset_0_1px_0_rgba(255,255,255,0.94)] backdrop-blur-sm dark:border-white/12 dark:bg-zinc-950/76 dark:shadow-[0_28px_64px_-42px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.08)]"
+            href={layoutFamily.href}
+          >
+            <span className="system-gradient relative block h-[45%] overflow-hidden rounded-[1.15rem] border border-white/80 bg-[radial-gradient(circle_at_18%_18%,#4f46e5,transparent_36%),radial-gradient(circle_at_86%_16%,#fed7aa,transparent_42%),linear-gradient(135deg,#60a5fa,#fb7185_52%,#fdba74)] shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] dark:border-white/10" />
+            <span className="mt-4 block h-1.5 w-12 rounded-full bg-zinc-300 dark:bg-white/16" />
+            <span className="mt-2 block h-1.5 w-full rounded-full bg-zinc-200 dark:bg-white/10" />
+            <span className="mt-1.5 block h-1.5 w-[88%] rounded-full bg-zinc-200 dark:bg-white/10" />
+            <span className="mt-auto inline-flex h-8 items-center justify-center rounded-full bg-foreground font-mono text-[10px] text-background shadow-[0_14px_30px_-18px_rgba(24,24,27,0.72)] transition-colors hover:bg-foreground/90 dark:shadow-[0_14px_30px_-18px_rgba(255,255,255,0.35)]">
+              Install
+            </span>
+          </Link>
+        </div>
+      </div>
+
+      <div className="mt-3 grid gap-3 text-[11px] text-muted-foreground sm:grid-cols-2">
+        <Link
+          className="rounded-md border bg-background/45 px-3 py-2 transition-colors hover:border-foreground/20 hover:text-foreground"
+          href={layoutFamily.href}
+        >
+          <span className="font-orbitron text-xs text-foreground">
+            {layoutFamily.name}
+          </span>
+          <span className="mt-1 block">{layoutFamily.meta}</span>
+        </Link>
+        <Link
+          className="rounded-md border bg-background/45 px-3 py-2 transition-colors hover:border-foreground/20 hover:text-foreground"
+          href={scenesFamily.href}
+        >
+          <span className="font-orbitron text-xs text-foreground">
+            {scenesFamily.name}
+          </span>
+          <span className="mt-1 block">{scenesFamily.meta}</span>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 function IntroBand() {
   return (
     <div className="grid gap-8 border-b px-4 py-10 md:px-8 md:py-14 lg:grid-cols-[1fr_420px] lg:items-end xl:grid-cols-[1fr_480px]">
       <div>
         <p className="text-xs font-medium uppercase tracking-normal text-muted-foreground">
-          Explore
+          Library map
         </p>
         <h2 className="mt-4 max-w-2xl font-orbitron text-3xl font-semibold leading-tight tracking-normal text-foreground md:text-4xl">
-          Browse by interaction.
+          Build with Vengeance UI.
         </h2>
         <p className="mt-4 max-w-xl text-sm leading-6 text-muted-foreground">
-          A compact index for motion, layout, feedback, and scene layers. Static
-          previews keep the landing page light while the links stay close.
+          Three focused paths for component discovery: forge the interaction,
+          tune the motion, then ship it through the registry.
         </p>
       </div>
 
@@ -704,15 +773,14 @@ function PreviewMatrix() {
     libraryFamilies;
 
   return (
-    <div className="relative grid border-b md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[258px_258px]">
+    <div className="relative grid border-b md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[270px_270px]">
       <FlowLayer />
       <InteractionBuilderCell
         buttonsFamily={buttons}
         interactiveFamily={interactive}
       />
       <MotionHubCell textFamily={textMotion} marqueeFamily={tooltipMarquee} />
-      <PreviewCell className="md:border-r lg:border-r-0" family={layout} index={2} />
-      <PreviewCell className="lg:border-b-0" family={scenes} index={5} />
+      <SystemComposerCell layoutFamily={layout} scenesFamily={scenes} />
     </div>
   );
 }
@@ -722,7 +790,7 @@ function QuickPicks() {
     <div className="grid gap-3 px-4 py-3.5 md:grid-cols-[auto_1fr] md:items-center md:px-8">
       <div className="flex items-center gap-2 text-xs font-medium uppercase tracking-normal text-muted-foreground">
         <Terminal className="size-3.5" />
-        Quick picks
+        Registry picks
       </div>
       <div className="flex flex-wrap gap-x-4 gap-y-2">
         {quickPicks.map((item) => (
@@ -840,6 +908,26 @@ export default function LandingPageGrid() {
           50% { opacity: 1; transform: translateX(-3px); }
         }
 
+        @keyframes system-action {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-3px); }
+        }
+
+        @keyframes system-card {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); }
+          50% { transform: translate(-50%, -51.5%) scale(1.012); }
+        }
+
+        @keyframes system-gradient {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+
+        @keyframes system-path {
+          0%, 100% { opacity: 0.28; stroke-dashoffset: 0; }
+          50% { opacity: 0.78; stroke-dashoffset: -11; }
+        }
+
         .preview-shine::after {
           content: "";
           position: absolute;
@@ -860,10 +948,16 @@ export default function LandingPageGrid() {
         .preview-cursor { animation: preview-cursor 3.8s ease-in-out infinite; }
         .preview-ray { animation: preview-ray 15s linear infinite; }
         .preview-ray-delay { animation-delay: -5.5s; }
-        .motion-core-ring { animation: motion-core-ring 9s linear infinite; }
+        .motion-core-ring {
+          animation: motion-core-ring 7.5s linear infinite;
+          filter: blur(0.2px);
+        }
         .motion-caret { animation: motion-caret 1.05s steps(1) infinite; }
         .motion-node { animation: motion-node 4.5s ease-in-out infinite; }
-        .motion-core { animation: motion-core 5.8s ease-in-out infinite; }
+        .motion-core {
+          animation: motion-core 5.8s ease-in-out infinite;
+          transform: translate(-50%, -50%);
+        }
         .motion-island { animation: motion-island 7s ease-in-out infinite; }
         .motion-path {
           animation: motion-path 5.8s ease-in-out infinite;
@@ -889,6 +983,22 @@ export default function LandingPageGrid() {
         .generator-card { animation: generator-card 7.4s ease-in-out infinite; }
         .generator-mini { animation: generator-mini 5.4s ease-in-out infinite; }
         .generator-mini-b { animation-delay: -2.2s; }
+        .system-action { animation: system-action 5.8s ease-in-out infinite; }
+        .system-card {
+          animation: system-card 7.2s ease-in-out infinite;
+          transform: translate(-50%, -50%);
+        }
+        .system-gradient {
+          animation: system-gradient 8.5s ease-in-out infinite;
+          background-size: 160% 160%;
+        }
+        .system-path {
+          animation: system-path 6.2s ease-in-out infinite;
+          stroke-dasharray: 5 7;
+          stroke-linecap: round;
+        }
+        .system-path-b { animation-delay: -1.5s; }
+        .system-path-c { animation-delay: -3s; }
 
         @media (prefers-reduced-motion: reduce) {
           .preview-shine::after,
@@ -907,7 +1017,11 @@ export default function LandingPageGrid() {
           .flow-dot,
           .generator-prompt,
           .generator-card,
-          .generator-mini {
+          .generator-mini,
+          .system-action,
+          .system-card,
+          .system-gradient,
+          .system-path {
             animation: none;
           }
         }
