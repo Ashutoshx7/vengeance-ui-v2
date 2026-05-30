@@ -197,14 +197,18 @@ export function SocialFlipButtonDemo() {
   },
 
   "line-hover-link": {
-    dependencies: "npm install framer-motion clsx tailwind-merge",
+    dependencies: "No extra dependencies required",
     includeUtils: true,
     usageCode: `import { LineHoverLink } from "@/components/ui/line-hover-link"
 
 export function LineHoverLinkDemo() {
   return (
-    <LineHoverLink href="/about">
-      About Us
+    <LineHoverLink
+      href="/components/line-hover-link"
+      variant="scribble"
+      className="text-lg font-medium"
+    >
+      Explore components
     </LineHoverLink>
   )
 }`,
@@ -212,7 +216,7 @@ export function LineHoverLinkDemo() {
       { prop: "children", type: "React.ReactNode", defaultValue: "-", description: "The link text content." },
       { prop: "href", type: "string", defaultValue: "-", description: "The link URL." },
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes." },
-      { prop: "variant", type: "'slide-up' | 'fade' | 'underline'", defaultValue: "'slide-up'", description: "The animation style for the hover effect." },
+      { prop: "variant", type: "'slide' | 'double' | 'grow' | 'strike' | 'fade' | 'pulse' | 'swap' | 'sweep' | 'bounce' | 'arc' | 'scribble'", defaultValue: "'slide'", description: "The underline, stroke, or sweep animation style." },
     ],
   },
 
