@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { useState, useCallback, memo, useMemo } from "react";
+import { useState, useCallback, memo } from "react";
 import { cn } from "@/lib/utils";
 import { CLICommand } from "@/components/docs/cli-command";
-import { CodeBlock as DocCodeBlock, Dependencies } from "@/components/docs/component-installation";
+import { CodeBlock as DocCodeBlock } from "@/components/docs/component-installation";
 import { PropsTable } from "@/components/docs/props-table";
 import { COMPONENT_DOCS } from "@/lib/component-docs";
 
@@ -35,11 +35,13 @@ const InstallationManual = memo(function InstallationManual({
   sourceCode,
   dependencies,
   includeUtils,
+  manualNotes,
 }: {
   componentName: string;
   sourceCode: string;
   dependencies: string;
   includeUtils?: boolean;
+  manualNotes?: string[];
 }) {
   return (
     <div className="space-y-6">
@@ -49,6 +51,21 @@ const InstallationManual = memo(function InstallationManual({
           <h3 className="text-lg font-semibold text-neutral-900 dark:text-zinc-200 mb-4 tracking-tight leading-none">Install dependencies</h3>
           <DocCodeBlock code={dependencies} />
         </div>
+
+        {manualNotes && manualNotes.length > 0 && (
+          <div className="relative">
+            <div className="absolute -left-[26px] -top-0.5 h-6 w-2 bg-neutral-300 dark:bg-zinc-600 rounded-r-full" />
+            <h3 className="text-lg font-semibold text-neutral-900 dark:text-zinc-200 mb-4 tracking-tight leading-none">Setup notes</h3>
+            <ul className="space-y-2 text-sm leading-6 text-neutral-600 dark:text-zinc-400">
+              {manualNotes.map((note) => (
+                <li key={note} className="flex gap-2">
+                  <span className="mt-2 size-1.5 shrink-0 rounded-full bg-neutral-400 dark:bg-zinc-500" />
+                  <span>{note}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {includeUtils && (
           <div className="relative">
@@ -128,6 +145,7 @@ export function ComponentDocsSections({ componentName, slug, sourceCode }: Compo
             sourceCode={sourceCode}
             dependencies={docs.dependencies}
             includeUtils={docs.includeUtils}
+            manualNotes={docs.manualNotes}
           />
         )}
       </section>

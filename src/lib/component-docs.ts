@@ -5,6 +5,8 @@ export interface ComponentDocData {
   dependencies: string;
   /** Whether to include the utils step (cn function). Most components need this. */
   includeUtils?: boolean;
+  /** Component-specific manual setup notes shown in the manual install tab. */
+  manualNotes?: string[];
   /** Usage code snippet */
   usageCode: string;
   /** Props data for PropsTable */
@@ -244,21 +246,65 @@ export function InteractiveBookDemo() {
   },
 
   "pixelated-image-trail": {
-    dependencies: "npm install framer-motion imagesloaded clsx tailwind-merge",
+    dependencies: "npm install clsx tailwind-merge",
     includeUtils: true,
+    manualNotes: [
+      "Render the component inside a relative black container with a fixed height and overflow hidden to match the preview.",
+      "Pass your own image URLs, or place the demo images under public/trail-images before using the default image list.",
+      "Use slices to control the horizontal sliced reveal. Fewer slices feel faster and more subtle.",
+      "Lower spawnThreshold values create a denser trail that follows the cursor more closely.",
+      "The trail is scoped to the preview container, so it will not bleed across the whole page.",
+    ],
     usageCode: `import PixelatedImageTrail from "@/components/ui/pixelated-image-trail"
 
 export function PixelatedImageTrailDemo() {
   return (
-    <PixelatedImageTrail
-      images={["/image1.jpg", "/image2.jpg", "/image3.jpg"]}
-    />
+    <div className="relative h-[500px] overflow-hidden rounded-xl bg-black">
+      <PixelatedImageTrail
+        images={[
+          "/trail-images/image1.jpg",
+          "/trail-images/image4.jpg",
+          "/trail-images/image5.jpg",
+        ]}
+        imageSize={220}
+        slices={5}
+        smoothing={0.32}
+        spawnThreshold={32}
+        config={{
+          imageLifespan: 1500,
+          inDuration: 280,
+          outDuration: 620,
+          staggerIn: 12,
+          staggerOut: 9,
+          slideDuration: 1300,
+        }}
+      />
+    </div>
   )
 }`,
     props: [
       { prop: "images", type: "string[]", defaultValue: "-", description: "Array of image URLs for the trail effect." },
       { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes." },
-      { prop: "pixelSize", type: "number", defaultValue: "10", description: "Size of each pixel block in the pixelation effect." },
+      { prop: "config", type: "Partial<TrailConfig>", defaultValue: "-", description: "Override timing and easing values for the reveal, slide, and exit animations." },
+      { prop: "slices", type: "number", defaultValue: "5", description: "Number of horizontal mask slices used for the reveal." },
+      { prop: "spawnThreshold", type: "number", defaultValue: "32", description: "Pointer distance in pixels before a new trail image appears. Lower values create a denser trail." },
+      { prop: "smoothing", type: "number", defaultValue: "0.32", description: "Interpolation factor used to smooth pointer movement. Values closer to 1 follow faster." },
+      { prop: "imageSize", type: "number", defaultValue: "220", description: "Rendered trail image size in pixels." },
+    ],
+    additionalPropSections: [
+      {
+        title: "TrailConfig",
+        data: [
+          { prop: "imageLifespan", type: "number", defaultValue: "1500", description: "Delay in milliseconds before a spawned image begins exiting." },
+          { prop: "inDuration", type: "number", defaultValue: "280", description: "Duration in milliseconds for each slice reveal." },
+          { prop: "outDuration", type: "number", defaultValue: "620", description: "Duration in milliseconds for fade and scale out." },
+          { prop: "staggerIn", type: "number", defaultValue: "12", description: "Delay in milliseconds between slice reveal steps." },
+          { prop: "staggerOut", type: "number", defaultValue: "9", description: "Delay in milliseconds between slice hide steps." },
+          { prop: "slideDuration", type: "number", defaultValue: "1300", description: "Duration in milliseconds for the image drift after spawning." },
+          { prop: "slideEasing", type: "string", defaultValue: "cubic-bezier(0.16, 1, 0.3, 1)", description: "CSS easing for image drift." },
+          { prop: "easing", type: "string", defaultValue: "cubic-bezier(0.16, 1, 0.3, 1)", description: "CSS easing for reveal and exit transitions." },
+        ],
+      },
     ],
   },
 
