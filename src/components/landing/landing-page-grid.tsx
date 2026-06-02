@@ -151,7 +151,7 @@ function InteractionBuilderCell({
             <MousePointer2 className="size-3.5" />
           </span>
           <div>
-            <p className="font-orbitron text-sm font-medium tracking-normal text-foreground">
+            <p className="font-outfit text-sm font-medium tracking-normal text-foreground">
               Button Forge
             </p>
             <p className="mt-1 text-[11px] text-muted-foreground">
@@ -159,7 +159,7 @@ function InteractionBuilderCell({
             </p>
           </div>
         </div>
-        <span className="font-mono text-[10px] text-muted-foreground">
+        <span className=" text-[10px] text-muted-foreground">
           01/03
         </span>
       </div>
@@ -179,7 +179,7 @@ function InteractionBuilderCell({
           <div className="absolute bottom-[-10%] left-1/2 h-24 w-32 -translate-x-1/2 rounded-t-[1.7rem] border border-zinc-300/55 bg-white/28 dark:border-white/[0.055] dark:bg-white/[0.014]" />
 
           <div className="generator-prompt absolute inset-x-[12%] top-[8%] z-30 flex h-10 items-center gap-1.5 rounded-full border border-white/95 bg-white/95 py-1 pl-4 pr-1.5 shadow-[0_16px_30px_-22px_rgba(24,24,27,0.72),0_2px_0_rgba(24,24,27,0.08)] dark:border-white/[0.08] dark:bg-[#07080b]/90 dark:shadow-[0_16px_36px_-30px_rgba(0,0,0,1)]">
-            <span className="min-w-0 flex-1 overflow-hidden whitespace-nowrap font-mono text-[7.5px] text-zinc-800 dark:text-zinc-300 sm:text-[8.5px]">
+            <span className="min-w-0 flex-1 overflow-hidden whitespace-nowrap  text-[7.5px] text-zinc-800 dark:text-zinc-300 sm:text-[8.5px]">
               Vengeance hover button set
             </span>
             <span className="motion-caret h-3 w-px bg-cyan-400/80" />
@@ -224,7 +224,7 @@ function InteractionBuilderCell({
                 </span>
               ))}
             </div>
-            <span className="relative mt-auto inline-flex h-8 items-center justify-center rounded-full border border-zinc-300 bg-zinc-200/80 font-mono text-[10px] text-zinc-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] transition-colors hover:bg-zinc-300/80 dark:border-white/[0.08] dark:bg-white/[0.07] dark:text-zinc-200 dark:hover:bg-white/[0.1]">
+            <span className="relative mt-auto inline-flex h-8 items-center justify-center rounded-full border border-zinc-300 bg-zinc-200/80  text-[10px] text-zinc-950 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] transition-colors hover:bg-zinc-300/80 dark:border-white/[0.08] dark:bg-white/[0.07] dark:text-zinc-200 dark:hover:bg-white/[0.1]">
               Open kit
             </span>
           </Link>
@@ -236,7 +236,7 @@ function InteractionBuilderCell({
           className="rounded-md border bg-background/45 px-3 py-2 transition-colors hover:border-foreground/20 hover:text-foreground dark:bg-white/[0.015]"
           href={buttonsFamily.href}
         >
-          <span className="font-orbitron text-xs text-foreground">
+          <span className="font-outfit text-xs text-foreground">
             {buttonsFamily.name}
           </span>
           <span className="mt-1 block">{buttonsFamily.meta}</span>
@@ -245,7 +245,7 @@ function InteractionBuilderCell({
           className="rounded-md border bg-background/45 px-3 py-2 transition-colors hover:border-foreground/20 hover:text-foreground dark:bg-white/[0.015]"
           href={interactiveFamily.href}
         >
-          <span className="font-orbitron text-xs text-foreground">
+          <span className="font-outfit text-xs text-foreground">
             {interactiveFamily.name}
           </span>
           <span className="mt-1 block">{interactiveFamily.meta}</span>
@@ -303,7 +303,7 @@ function MotionHubCell({
             <Layers2 className="size-3.5" />
           </span>
           <div>
-            <p className="font-orbitron text-sm font-medium tracking-normal text-foreground">
+            <p className="font-outfit text-sm font-medium tracking-normal text-foreground">
               Motion Kernel
             </p>
             <p className="mt-1 text-[11px] text-muted-foreground">
@@ -311,7 +311,7 @@ function MotionHubCell({
             </p>
           </div>
         </div>
-        <span className="font-mono text-[10px] text-muted-foreground">
+        <span className=" text-[10px] text-muted-foreground">
           02/03
         </span>
       </div>
@@ -407,7 +407,7 @@ function MotionHubCell({
 
           <MousePointer2 className="absolute left-[15%] top-[51%] z-40 size-6 fill-zinc-950 text-zinc-950 dark:fill-zinc-100 dark:text-zinc-100" />
 
-          <div className="absolute left-[22%] top-[55%] z-40 rounded-md border border-zinc-200 bg-white px-2 py-1 font-mono text-[10px] text-zinc-900 shadow-lg dark:border-white/[0.08] dark:bg-[#050608] dark:text-zinc-200">
+          <div className="absolute left-[22%] top-[55%] z-40 rounded-md border border-zinc-200 bg-white px-2 py-1  text-[10px] text-zinc-900 shadow-lg dark:border-white/[0.08] dark:bg-[#050608] dark:text-zinc-200">
             VUI
           </div>
 
@@ -416,7 +416,7 @@ function MotionHubCell({
               <div className="motion-core-ring size-full rounded-full bg-[conic-gradient(from_145deg,transparent_0_24%,#93c5fd_36%,#a5b4fc_50%,#f9a8d4_64%,#fde68a_72%,transparent_86%)] opacity-82 dark:opacity-60" />
             </div>
             <Link
-              className="relative flex size-[5.4rem] items-center justify-center rounded-full border border-zinc-800 bg-zinc-950 font-mono text-[10px] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_10px_26px_-18px_rgba(0,0,0,0.75)]"
+              className="relative flex size-[5.4rem] items-center justify-center rounded-full border border-zinc-800 bg-zinc-950  text-[10px] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_10px_26px_-18px_rgba(0,0,0,0.75)]"
               href={textFamily.href}
             >
               indexing...
@@ -448,7 +448,7 @@ function MotionHubCell({
           className="rounded-md border bg-background/45 px-3 py-2 transition-colors hover:border-foreground/20 hover:text-foreground dark:bg-white/[0.015]"
           href={textFamily.href}
         >
-          <span className="font-orbitron text-xs text-foreground">
+          <span className="font-outfit text-xs text-foreground">
             {textFamily.name}
           </span>
           <span className="mt-1 block">{textFamily.meta}</span>
@@ -457,7 +457,7 @@ function MotionHubCell({
           className="rounded-md border bg-background/45 px-3 py-2 transition-colors hover:border-foreground/20 hover:text-foreground dark:bg-white/[0.015]"
           href={marqueeFamily.href}
         >
-          <span className="font-orbitron text-xs text-foreground">
+          <span className="font-outfit text-xs text-foreground">
             {marqueeFamily.name}
           </span>
           <span className="mt-1 block">{marqueeFamily.meta}</span>
@@ -484,7 +484,7 @@ function SystemActionPill({
 }) {
   return (
     <Link
-      className={`system-action absolute z-30 flex h-10 items-center gap-2 rounded-lg border border-white/85 bg-white/88 px-2.5 pr-4 font-mono text-[9px] text-zinc-800 shadow-[0_14px_36px_-28px_rgba(24,24,27,0.72),inset_0_1px_0_rgba(255,255,255,0.88)] backdrop-blur-sm transition-transform hover:-translate-y-0.5 dark:border-white/[0.075] dark:bg-[#06070a]/88 dark:text-zinc-300 dark:shadow-[0_14px_36px_-30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.045)] ${className}`}
+      className={`system-action absolute z-30 flex h-10 items-center gap-2 rounded-lg border border-white/85 bg-white/88 px-2.5 pr-4  text-[9px] text-zinc-800 shadow-[0_14px_36px_-28px_rgba(24,24,27,0.72),inset_0_1px_0_rgba(255,255,255,0.88)] backdrop-blur-sm transition-transform hover:-translate-y-0.5 dark:border-white/[0.075] dark:bg-[#06070a]/88 dark:text-zinc-300 dark:shadow-[0_14px_36px_-30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.045)] ${className}`}
       href={href}
       style={{ animationDelay: delay }}
     >
@@ -513,7 +513,7 @@ function SystemComposerCell({
             <Grid3X3 className="size-3.5" />
           </span>
           <div>
-            <p className="font-orbitron text-sm font-medium tracking-normal text-foreground">
+            <p className="font-outfit text-sm font-medium tracking-normal text-foreground">
               Registry Composer
             </p>
             <p className="mt-1 text-[11px] text-muted-foreground">
@@ -521,7 +521,7 @@ function SystemComposerCell({
             </p>
           </div>
         </div>
-        <span className="font-mono text-[10px] text-muted-foreground">
+        <span className=" text-[10px] text-muted-foreground">
           03/03
         </span>
       </div>
@@ -648,7 +648,7 @@ function SystemComposerCell({
             <span className="mt-4 block h-1.5 w-12 rounded-full bg-zinc-300 dark:bg-white/[0.09]" />
             <span className="mt-2 block h-1.5 w-full rounded-full bg-zinc-200 dark:bg-white/[0.055]" />
             <span className="mt-1.5 block h-1.5 w-[88%] rounded-full bg-zinc-200 dark:bg-white/[0.055]" />
-            <span className="mt-auto inline-flex h-8 items-center justify-center rounded-full bg-foreground font-mono text-[10px] text-background shadow-[0_14px_30px_-20px_rgba(24,24,27,0.68)] transition-colors hover:bg-foreground/90 dark:shadow-[0_14px_30px_-20px_rgba(255,255,255,0.28)]">
+            <span className="mt-auto inline-flex h-8 items-center justify-center rounded-full bg-foreground  text-[10px] text-background shadow-[0_14px_30px_-20px_rgba(24,24,27,0.68)] transition-colors hover:bg-foreground/90 dark:shadow-[0_14px_30px_-20px_rgba(255,255,255,0.28)]">
               Install
             </span>
           </Link>
@@ -660,7 +660,7 @@ function SystemComposerCell({
           className="rounded-md border bg-background/45 px-3 py-2 transition-colors hover:border-foreground/20 hover:text-foreground dark:bg-white/[0.015]"
           href={layoutFamily.href}
         >
-          <span className="font-orbitron text-xs text-foreground">
+          <span className="font-outfit text-xs text-foreground">
             {layoutFamily.name}
           </span>
           <span className="mt-1 block">{layoutFamily.meta}</span>
@@ -669,7 +669,7 @@ function SystemComposerCell({
           className="rounded-md border bg-background/45 px-3 py-2 transition-colors hover:border-foreground/20 hover:text-foreground dark:bg-white/[0.015]"
           href={scenesFamily.href}
         >
-          <span className="font-orbitron text-xs text-foreground">
+          <span className="font-outfit text-xs text-foreground">
             {scenesFamily.name}
           </span>
           <span className="mt-1 block">{scenesFamily.meta}</span>
@@ -686,7 +686,7 @@ function IntroBand() {
         <p className="text-xs font-medium uppercase tracking-normal text-muted-foreground">
           Library map
         </p>
-        <h2 className="mt-4 max-w-2xl font-orbitron text-3xl font-semibold leading-tight tracking-normal text-foreground md:text-4xl">
+        <h2 className="mt-4 max-w-2xl font-outfit text-3xl font-semibold leading-tight tracking-normal text-foreground md:text-4xl">
           Build with Vengeance UI.
         </h2>
         <p className="mt-4 max-w-xl text-sm leading-6 text-muted-foreground">
@@ -700,7 +700,7 @@ function IntroBand() {
           <span className="flex size-8 items-center justify-center rounded-md border bg-background/70 text-muted-foreground dark:border-white/[0.07] dark:bg-white/[0.018]">
             <Command className="size-3.5" />
           </span>
-          <code className="min-w-0 truncate px-1 font-mono text-xs text-muted-foreground">
+          <code className="min-w-0 truncate px-1  text-xs text-muted-foreground">
             npx shadcn@latest add @vengeanceui/[component]
           </code>
           <Link
@@ -714,7 +714,7 @@ function IntroBand() {
         <div className="grid grid-cols-3 overflow-hidden rounded-lg border bg-background/30 dark:border-white/[0.07] dark:bg-white/[0.012]">
           {stats.map((stat) => (
             <div className="border-r px-3 py-2.5 last:border-r-0 dark:border-white/[0.07]" key={stat.label}>
-              <p className="font-orbitron text-sm font-semibold leading-none tracking-normal text-foreground">
+              <p className="font-outfit text-sm font-semibold leading-none tracking-normal text-foreground">
                 {stat.value}
               </p>
               <p className="mt-1.5 text-[10px] leading-none text-muted-foreground">

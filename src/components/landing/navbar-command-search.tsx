@@ -108,7 +108,7 @@ export function NavbarCommandSearch() {
                     <Search className="size-4 shrink-0 opacity-65 transition-opacity group-hover:opacity-90" />
                     <span className="truncate">Search documentation...</span>
                 </span>
-                <kbd className="ml-3 rounded border border-foreground/10 bg-background/80 px-1.5 py-0.5 font-mono text-[11px] leading-none text-muted-foreground shadow-sm dark:border-white/10 dark:bg-white/[0.05]">
+                <kbd className="ml-3 rounded border border-foreground/10 bg-background/80 px-1.5 py-0.5  text-[11px] leading-none text-muted-foreground shadow-sm dark:border-white/10 dark:bg-white/[0.05]">
                     ⌘ K
                 </kbd>
             </button>

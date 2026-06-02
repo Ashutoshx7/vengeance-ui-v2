@@ -7,8 +7,8 @@
 
 @theme inline {
 
-  --font-mono: 'Geist Mono', 'Fira Code', monospace;
-  --font-orbitron: var(--font-orbitron);
+  --font-mono: var(--font-dm-mono-font);
+  --font-outfit: var(--font-outfit-sans);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -173,13 +173,14 @@
   /* Lazy-render off-screen sections — content-visibility skips layout/paint
      for sections not in viewport, dramatically reducing CPU during scroll.
      Exclude the hero (first child) so it paints immediately. */
-  main > section:not(:first-child) {
+  main>section:not(:first-child) {
     content-visibility: auto;
     contain-intrinsic-size: auto 700px;
   }
 
   /* Snappier link/button transitions */
-  a, button {
+  a,
+  button {
     transition-duration: 100ms;
   }
 
@@ -204,7 +205,10 @@
 
 /* ── Global reduced-motion: kills ALL animations for low-power / a11y ── */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -221,17 +225,34 @@
 
 /* CTA section animations */
 @keyframes cta-float {
-  0%, 100% { transform: translate(-50%, -50%) translateY(0) rotate(-2deg); }
-  50% { transform: translate(-50%, -50%) translateY(-15px) rotate(2deg); }
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0) rotate(-2deg);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) translateY(-15px) rotate(2deg);
+  }
 }
+
 @keyframes cta-logo-float {
-  0%, 100% { transform: translate(-50%, -50%) translateY(-10px) scale(1); }
-  50% { transform: translate(-50%, -50%) translateY(-30px) scale(1.05); }
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(-10px) scale(1);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) translateY(-30px) scale(1.05);
+  }
 }
+
 .cta-float-box {
   animation: cta-float 5s ease-in-out infinite;
   will-change: transform;
 }
+
 .cta-float-logo {
   animation: cta-logo-float 4s ease-in-out 0.5s infinite;
   will-change: transform;
@@ -257,8 +278,13 @@
 
 /* Testimonial scroll animation */
 @keyframes testimonial-scroll {
-  from { transform: translateY(0); }
-  to { transform: translateY(-50%); }
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-50%);
+  }
 }
 
 [data-theme="mist"] {
@@ -377,8 +403,15 @@
 
 /* IsometricHeroBox floating animation */
 @keyframes hero-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 .hero-face-preview {
@@ -473,16 +506,19 @@
   from {
     background-position: 50% 50%, 50% 50%;
   }
+
   to {
     background-position: 350% 50%, 350% 50%;
   }
 }
 
 @keyframes aurora-blink {
+
   0%,
   100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.3;
   }

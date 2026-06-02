@@ -186,7 +186,7 @@ export default function TemplatesPage() {
                                 <div className="flex items-center justify-between border-b border-foreground/10 pb-3">
                                     <div>
                                         <p className="font-mono text-xs text-muted-foreground">/templates</p>
-                                        <p className="font-orbitron text-sm font-semibold">Portfolio queue</p>
+                                        <p className="font-outfit text-sm font-semibold">Portfolio queue</p>
                                     </div>
                                     <BriefcaseBusiness className="size-5 text-muted-foreground" />
                                 </div>
@@ -211,7 +211,7 @@ export default function TemplatesPage() {
                                                 <p className="font-mono text-[11px] uppercase text-muted-foreground">
                                                     0{index + 1} / portfolio
                                                 </p>
-                                                <h2 className="truncate font-orbitron text-base font-semibold">
+                                                <h2 className="truncate font-outfit text-base font-semibold">
                                                     {template.title}
                                                 </h2>
                                                 <p className="line-clamp-2 text-sm text-muted-foreground">

@@ -9,5 +9,5 @@ export default function SubHeading({ children, as = "p", variant = "medium", cla
     };
     const Tag = as;
 
-    return <Tag className={cn("text-muted-foreground font-mono", variants[variant], className)}>{children}</Tag>
+    return <Tag className={cn("text-muted-foreground ", variants[variant], className)}>{children}</Tag>
 }

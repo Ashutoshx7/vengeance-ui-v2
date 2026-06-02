@@ -147,7 +147,7 @@ export const Navbar = memo(function Navbar() {
                             className="flex w-fit items-center gap-3"
                             prefetch={true}>
                             <LogoIcon className="w-6 text-foreground rotate-180" />
-                            <span className="font-orbitron text-xl font-bold tracking-tight -ml-2">Vengeance UI</span>
+                            <span className="font-outfit text-xl font-bold tracking-tight -ml-2">Vengeance UI</span>
                         </Link>
 
                         <div className="-mr-2 hidden items-center gap-4 sm:flex">
@@ -217,7 +217,7 @@ export const Navbar = memo(function Navbar() {
                                                     height={48}
                                                     className="w-12 rotate-180"
                                                 />
-                                                <span className="font-orbitron font-bold tracking-tight -ml-3">Vengeance UI</span>
+                                                <span className="font-outfit font-bold tracking-tight -ml-3">Vengeance UI</span>
                                             </Link>
                                             <DialogClose asChild>
                                                 <Button

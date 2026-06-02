@@ -129,7 +129,7 @@ export function FeatureCard1() {
                                 <Copy className="w-4 h-4 text-foreground/60 group-hover:text-foreground" />
                                 <span className="text-sm font-medium text-foreground/80 group-hover:text-foreground">Copy Code</span>
                             </div>
-                            <span className="text-xs text-foreground/40 font-mono tracking-widest">⌘C</span>
+                            <span className="text-xs text-foreground/40  tracking-widest">⌘C</span>
                         </div>
 
                         <div className="flex items-center justify-between px-3 py-2.5 hover:bg-muted rounded-lg transition-colors cursor-pointer group">
@@ -137,7 +137,7 @@ export function FeatureCard1() {
                                 <Share2 className="w-4 h-4 text-foreground/60 group-hover:text-foreground" />
                                 <span className="text-sm font-medium text-foreground/80 group-hover:text-foreground">Share</span>
                             </div>
-                            <span className="text-xs text-foreground/40 font-mono tracking-widest">⇧⌘S</span>
+                            <span className="text-xs text-foreground/40  tracking-widest">⇧⌘S</span>
                         </div>
 
                         <div className="h-px w-full bg-border/50 my-1" />
@@ -147,7 +147,7 @@ export function FeatureCard1() {
                                 <Trash2 className="w-4 h-4 text-red-500/70 group-hover:text-red-500" />
                                 <span className="text-sm font-medium text-red-500/80 group-hover:text-red-500">Delete</span>
                             </div>
-                            <span className="text-xs text-red-500/40 font-mono tracking-widest">⌘⌫</span>
+                            <span className="text-xs text-red-500/40  tracking-widest">⌘⌫</span>
                         </div>
                     </div>
                 </motion.div>

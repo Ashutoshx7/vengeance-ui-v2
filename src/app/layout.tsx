@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
-import { Inter, Orbitron } from "next/font/google";
+import { DM_Sans, Outfit, DM_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/landing/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 
-const inter = Inter({ subsets: ["latin"] });
+const dmSans = DM_Sans({ subsets: ["latin"] });
 
-const orbitron = Orbitron({
-  variable: '--font-orbitron',
+const outfitFont = Outfit({
+  variable: '--font-outfit-sans',
+  subsets: ['latin'],
+})
+
+const dmMono = DM_Mono({
+  variable: '--font-dm-mono-font',
+  weight: ['400', '500'],
   subsets: ['latin'],
 })
 
@@ -45,7 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning className={`${inter.className} ${orbitron.variable} antialiased selection:bg-foreground selection:text-background min-h-screen flex flex-col`}>
+      <body suppressHydrationWarning className={`${dmSans.className} ${outfitFont.variable} ${dmMono.variable} antialiased selection:bg-foreground selection:text-background min-h-screen flex flex-col`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar />
           {children}

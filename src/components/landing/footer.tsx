@@ -32,7 +32,7 @@ export default function Footer() {
                         <div className="flex flex-col gap-4 md:max-w-xs w-full">
                             <div className="flex items-center gap-2">
                                 <LogoIcon className="h-7 w-7 text-foreground rotate-180" />
-                                <span className="text-lg font-orbitron font-bold">Vengeance UI</span>
+                                <span className="text-lg font-outfit font-bold">Vengeance UI</span>
                             </div>
                             <p className="text-sm text-muted-foreground leading-relaxed">
                                 Next-gen UI interactions. Hover effects, animated tooltips, and scroll-driven layouts for modern marketing websites.

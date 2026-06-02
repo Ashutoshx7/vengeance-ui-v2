@@ -22,7 +22,7 @@ export default function Heading({
   return (
     <Tag
       className={cn(
-        "font-orbitron font-medium tracking-tight",
+        "font-outfit font-medium tracking-tight",
         variants[variant],
         className,
       )}
