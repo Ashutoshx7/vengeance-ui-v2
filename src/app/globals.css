@@ -170,12 +170,10 @@
     display: none;
   }
 
-  /* Lazy-render off-screen sections — content-visibility skips layout/paint
-     for sections not in viewport, dramatically reducing CPU during scroll.
-     Exclude the hero (first child) so it paints immediately. */
-  main > section:not(:first-child) {
+  /* Skip layout/paint work for landing sections once they leave the viewport. */
+  main[data-landing-page] > section {
     content-visibility: auto;
-    contain-intrinsic-size: auto 700px;
+    contain-intrinsic-size: auto 820px;
   }
 
   /* Snappier link/button transitions */
@@ -229,10 +227,16 @@
   50% { transform: translate(-50%, -50%) translateY(-30px) scale(1.05); }
 }
 .cta-float-box {
+  will-change: auto;
+}
+.cta-float-logo {
+  will-change: auto;
+}
+.cta-art:hover .cta-float-box {
   animation: cta-float 5s ease-in-out infinite;
   will-change: transform;
 }
-.cta-float-logo {
+.cta-art:hover .cta-float-logo {
   animation: cta-logo-float 4s ease-in-out 0.5s infinite;
   will-change: transform;
 }

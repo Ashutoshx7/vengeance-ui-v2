@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Layers, MousePointer2, Sparkles, SlidersHorizontal, Copy, Share2, Trash2, ArrowRight, Bell, Palette, Wand2, Zap, CheckCircle2 } from "lucide-react";
+import { Layers, MousePointer2, Sparkles, SlidersHorizontal, Copy, Share2, Trash2, ArrowRight, Bell, Palette } from "lucide-react";
 import LogoIcon from "@/assets/logo/logo-icon";
 import { Avatar } from "./avatar"
 import { cn } from "@/lib/utils"
@@ -255,38 +255,38 @@ export function FeatureCard3() {
             <Avatar image="/avatars/batmaaanji.jpg" />
         </div>
 
-        <ConnectorLine className="text-neutral-200 -z-10 dark:text-neutral-800 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" strokeWidth={3} length={340} animate={true} delay={0.2} />
+        <ConnectorLine className="text-neutral-200 -z-10 dark:text-neutral-800 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" strokeWidth={3} length={340} animate={false} delay={0.2} />
 
 
-        <ConnectorLine className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute left-20 bottom-19" strokeWidth={3} length={300} orientation="horizontal" animate={true} delay={0.9} />
+        <ConnectorLine className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute left-20 bottom-19" strokeWidth={3} length={300} orientation="horizontal" animate={false} delay={0.9} />
 
-        <ConnectorLine className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute right-20 bottom-19 rotate-180" strokeWidth={3} length={300} orientation="horizontal" animate={true} />
-
-
-        <ConnectorLine className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-20 bottom-16" strokeWidth={3} length={200} orientation="horizontal" animate={true} delay={0.9} />
-
-        <ConnectorLine className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-20 bottom-16 rotate-180" strokeWidth={3} length={200} orientation="horizontal" animate={true} />
+        <ConnectorLine className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute right-20 bottom-19 rotate-180" strokeWidth={3} length={300} orientation="horizontal" animate={false} />
 
 
-        <ConnectorLine className="hidden sm:block md:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-15 bottom-12" strokeWidth={3} length={280} orientation="horizontal" animate={true} delay={0.9} />
+        <ConnectorLine className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-20 bottom-16" strokeWidth={3} length={200} orientation="horizontal" animate={false} delay={0.9} />
 
-        <ConnectorLine className="hidden sm:block md:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-15 bottom-12 rotate-180" strokeWidth={3} length={280} orientation="horizontal" animate={true} />
-
-
-        <ConnectorLine className="sm:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-15 bottom-12" strokeWidth={3} length={165} orientation="horizontal" animate={true} delay={0.9} />
-
-        <ConnectorLine className="sm:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-15 bottom-12 rotate-180" strokeWidth={3} length={165} orientation="horizontal" animate={true} />
+        <ConnectorLine className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-20 bottom-16 rotate-180" strokeWidth={3} length={200} orientation="horizontal" animate={false} />
 
 
+        <ConnectorLine className="hidden sm:block md:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-15 bottom-12" strokeWidth={3} length={280} orientation="horizontal" animate={false} delay={0.9} />
+
+        <ConnectorLine className="hidden sm:block md:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-15 bottom-12 rotate-180" strokeWidth={3} length={280} orientation="horizontal" animate={false} />
 
 
-        <CornerConnector className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute left-16 top-25" strokeWidth={3} width={325} animate={true} delay={0.4} />
+        <ConnectorLine className="sm:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-15 bottom-12" strokeWidth={3} length={165} orientation="horizontal" animate={false} delay={0.9} />
 
-        <CornerConnector className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute right-16 top-25 transform-[scaleX(-1)]" strokeWidth={3} width={325} animate={true} delay={1} />
+        <ConnectorLine className="sm:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-15 bottom-12 rotate-180" strokeWidth={3} length={165} orientation="horizontal" animate={false} />
 
-        <CornerConnector className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-16 top-25" strokeWidth={3} width={200} animate={true} delay={0.4} />
 
-        <CornerConnector className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-16 top-25 transform-[scaleX(-1)]" strokeWidth={3} width={200} animate={true} delay={1} />
+
+
+        <CornerConnector className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute left-16 top-25" strokeWidth={3} width={325} animate={false} delay={0.4} />
+
+        <CornerConnector className="hidden lg:block text-neutral-200 -z-10 dark:text-neutral-800 absolute right-16 top-25 transform-[scaleX(-1)]" strokeWidth={3} width={325} animate={false} delay={1} />
+
+        <CornerConnector className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute left-16 top-25" strokeWidth={3} width={200} animate={false} delay={0.4} />
+
+        <CornerConnector className="hidden md:block lg:hidden text-neutral-200 -z-10 dark:text-neutral-800 absolute right-16 top-25 transform-[scaleX(-1)]" strokeWidth={3} width={200} animate={false} delay={1} />
 
 
 
@@ -465,4 +465,3 @@ export function FeatureCard4() {
         </div>
     )
 }
-

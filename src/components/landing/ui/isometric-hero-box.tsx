@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AnimatedButton from "@/components/ui/animated-button";
 import CandyButton from "@/components/ui/candy-button";
 import CornerButton from "@/components/ui/corner-button";
@@ -111,11 +111,27 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
   const svgHeight = (svgWidth * 488) / 360;
   
   const [pairStartIndex, setPairStartIndex] = useState(0);
+  const [isInView, setIsInView] = useState(true);
+  const rootRef = useRef<HTMLDivElement>(null);
   const leftIndex = pairStartIndex;
   const rightIndex = (pairStartIndex + 1) % COMPONENT_LIST.length;
   
   useEffect(() => {
-    // Start cycling components after a slight delay
+    const root = rootRef.current;
+    if (!root || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { rootMargin: "160px 0px", threshold: 0 }
+    );
+
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isInView) return;
+
     let interval: ReturnType<typeof setInterval> | undefined;
     const startDelay = setTimeout(() => {
       interval = setInterval(() => {
@@ -129,10 +145,11 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
         clearInterval(interval);
       }
     };
-  }, []);
+  }, [isInView]);
 
   return (
     <div 
+      ref={rootRef}
       className={`relative z-20 inline-block ${className}`}
     >
       <svg
@@ -272,47 +289,55 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
         </g>
 
         <g>
-          <animateTransform
-            attributeName="transform"
-            type="translate"
-            values="0 -6; 0 -18; 0 -6"
-            dur="4s"
-            repeatCount="indefinite"
-            calcMode="spline"
-            keyTimes="0; 0.5; 1"
-            keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
-          />
+          {isInView && (
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0 -6; 0 -18; 0 -6"
+              dur="4s"
+              repeatCount="indefinite"
+              calcMode="spline"
+              keyTimes="0; 0.5; 1"
+              keySplines="0.42 0 0.58 1; 0.42 0 0.58 1"
+            />
+          )}
 
-        <g
-          className="hidden dark:block text-white"
-          opacity="0.2"
-          filter={`url(#floatingCubeAura_${uid})`}
-        >
-          <rect
-            width="173.205"
-            height="173.205"
-            transform="matrix(0.866025 0.5 -0.866025 0.5 180 7)"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="8"
-          />
-          <rect
-            width="173.205"
-            height="173.21"
-            transform="matrix(0.866025 0.5 0 1 30 93.6025)"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="8"
-          />
-          <rect
-            width="173.205"
-            height="173.21"
-            transform="matrix(0.866025 -0.5 0 1 180 180.205)"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="8"
-          />
-        </g>
+        {([
+          { filter: `url(#floatingCubeAura_${uid})`, opacity: 0.18, strokeWidth: 10 },
+          { filter: `url(#floatingCubeBloom_${uid})`, opacity: 0.28, strokeWidth: 3.5 },
+        ] as const).map((glow, index) => (
+          <g
+            key={`cube-glow-${index}`}
+            className="hidden dark:block text-white"
+            opacity={glow.opacity}
+            filter={glow.filter}
+          >
+            <rect
+              width="173.205"
+              height="173.205"
+              transform="matrix(0.866025 0.5 -0.866025 0.5 180 7)"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={glow.strokeWidth}
+            />
+            <rect
+              width="173.205"
+              height="173.21"
+              transform="matrix(0.866025 0.5 0 1 30 93.6025)"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={glow.strokeWidth}
+            />
+            <rect
+              width="173.205"
+              height="173.21"
+              transform="matrix(0.866025 -0.5 0 1 180 180.205)"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={glow.strokeWidth}
+            />
+          </g>
+        ))}
 
         <path
           d="M335.385 90.2881V269.711L180 359.423L24.6152 269.711V90.2881L180 0.576172L335.385 90.2881Z"
@@ -535,14 +560,26 @@ const IsometricHeroBox: React.FC<IsometricCubeBoxProps> = ({
 
           <filter
             id={`floatingCubeAura_${uid}`}
-            x="-38"
-            y="-38"
-            width="436"
-            height="450"
+            x="-52"
+            y="-52"
+            width="464"
+            height="478"
             filterUnits="userSpaceOnUse"
             colorInterpolationFilters="sRGB"
           >
-            <feGaussianBlur stdDeviation="7" />
+            <feGaussianBlur stdDeviation="10" />
+          </filter>
+
+          <filter
+            id={`floatingCubeBloom_${uid}`}
+            x="-42"
+            y="-42"
+            width="444"
+            height="458"
+            filterUnits="userSpaceOnUse"
+            colorInterpolationFilters="sRGB"
+          >
+            <feGaussianBlur stdDeviation="3.2" />
           </filter>
 
           <filter

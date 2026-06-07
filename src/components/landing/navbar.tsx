@@ -138,7 +138,7 @@ export const Navbar = memo(function Navbar() {
     }), [isActive])
 
     return (
-        <header className="sticky top-0 isolate z-[200] border-b border-neutral-200 bg-background/90 backdrop-blur-md dark:border-[#222] dark:bg-[#050608]/90" style={{ transform: 'translateZ(0)', willChange: 'transform' }}>
+        <header className="sticky top-0 isolate z-[200] border-b border-neutral-200 bg-background/95 dark:border-[#222] dark:bg-[#050608]/95">
             <div className="w-full px-4 md:px-8 xl:px-8">
                 <div>
                     <div className="flex items-center justify-between py-3 lg:py-4">

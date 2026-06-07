@@ -1,5 +1,3 @@
-"use client"
-
 import Link from "next/link";
 import Container from "./container";
 import Heading from "./heading";
@@ -32,7 +30,7 @@ export default function CTA() {
                     </div>
 
                     <div className="flex-2 relative min-h-[300px] hidden lg:flex items-center justify-center">
-                        <div className="relative w-full h-full">
+                        <div className="cta-art relative w-full h-full">
 
                             {/* Bottom Base Layer */}
                             <div
